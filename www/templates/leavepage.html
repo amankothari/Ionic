@@ -1,0 +1,48 @@
+﻿
+
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Request OOO</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate="novalidate"  on-valid-submit="save()">
+            <div class="list">
+                <label class="item item-input validated">
+                    <span class="input-label">Emergency Mail</span>
+                    <input type="email" ng-model="leave.email" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Emergency Contact</span>
+                    <input type="tel" ng-model="leave.phone" maxlength="10" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <div class="item item-divider">
+                </div>
+                <label class="item item-input validated">
+                    <span class="input-label">Start Date</span>
+                    <input type="date" ng-model="leave.fromdate" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">End Date</span>
+                    <input type="date" ng-model="leave.enddate" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Reason</span>
+                    <textarea id="TextArea" ng-model="leave.reason" ng-keyup="autoExpand($event)" placeholder="notes" required="required"></textarea>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <div class="row">
+                    <div class="col col-50"></div>
+                    <div class="col col-50">
+                        <button class="button button-light button-positive" type="submit">Save</button>
+                        <a class="button button-light button-assertive" href="#/app/home">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-modal-view>

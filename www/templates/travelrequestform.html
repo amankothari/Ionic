@@ -1,0 +1,64 @@
+﻿
+
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">New Travel Request</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate="novalidate"  on-valid-submit="save()">
+            <div class="list">
+                <label class="item item-input validated">
+                    <span class="input-label">Departing City</span>
+                    <input type="text" id="Autocomplete" ng-autocomplete ng-model="travel.departcity" required="required" />
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Arrival City</span>
+                    <input type="text" id="Autocomplete" ng-autocomplete ng-model="travel.arrivalcity" required="required"/>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Departure Date</span>
+                    <input type="date" ng-model="travel.departdate" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                    <!--<input type="text" pick-a-date="date" placeholder="Select Date" ng-model="travel.DepartureDate" />-->
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Return Date</span>
+                    <input type="date" ng-model="travel.returndate" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <div class="row">
+                    <div class="col col-33">Booking Required</div>
+                    <div class="col">
+                        <label class="checkbox">
+                            Airfare
+                            <input type="checkbox" checked="" ng-model="travel.aifare">
+                        </label><br />
+                        <label class="checkbox"> Hotel
+                            <input type="checkbox" checked="" ng-model="travel.hotel">
+                        </label><br />
+                        <label class="checkbox">Auto
+                            <input type="checkbox" checked="" ng-model="travel.auto">
+                        </label>
+                    </div>
+                </div>
+                <label class="item item-input validated">
+                    <span class="input-label">Notes(optional)</span>
+                    <!--<textarea  type="text" ng-model="task.Details" > </textarea>-->
+                    <textarea id="textarea" ng-model="travel.description" ng-keyup="autoexpand($event)" placeholder="notes" required="required"></textarea>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <div class="row">
+                    <div class="col col-50"></div>
+                    <div class="col col-50">
+                        <button class="button button-light button-positive" type="submit">Save</button>
+                        <a class="button button-light button-assertive" href="#/app/home">Cancel</a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </ion-content>
+</ion-modal-view>

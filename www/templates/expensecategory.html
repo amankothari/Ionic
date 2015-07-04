@@ -1,0 +1,19 @@
+﻿
+<ion-view view-title="Select Expense Category">
+    <ion-content ng-init="initCategory()">
+        <p id="p" ng-show="categoryload">
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <div class="list list-inset" ng-show="!categoryload">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" ng-model="search" placeholder="Search">
+            </label>
+        </div>
+        <ul class="list">
+            <li class="item" ng-repeat="cat in Categories | filter:search" ng-click="setcategory(cat)">
+                {{cat.Name}}
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,53 @@
+﻿
+<ion-view view-title="Timesheet" >
+   
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-icon icon ion-plus-round" ng-click="Goto()"></button>-->
+        <!--<a class="button button-stable" ng-click="Goto()">
+            +
+        </a>-->
+        <button class="button button-icon icon ion-android-add" ng-click="Goto()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+
+        <div class="bar bar-header">
+            <button class="button button-icon icon ion-chevron-left" ng-click="slidePrevious()" ng-disabled="slidedisable"></button>
+            <div class="h1 title">{{date}}</div>
+            <button class="button button-icon icon ion-chevron-right" ng-click="slideNext()" ng-disabled="slidedisable"></button>
+        </div>
+        <br />
+        <br />
+        <p id="p" ng-show="timesheetload">
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <div class="row" ng-show="!timesheetload">
+            <div class="col col-50"></div>
+            <div class="col col-50"><h5>Total hours: {{totalhours}}</h5></div>
+
+        </div>
+        <ion-list>
+            <div ng-repeat="item in SpecificDataforThisdate" ng-show="!timesheetload">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(item)"
+                          ng-class="{active: isGroupShown(item)}">
+                    
+                    <br />
+                    <div class="row">
+                        <!--<div class="col"><i class="icon" ng-class="isGroupShown(item) ? 'ion-minus' : 'ion-plus'"></i></div>-->
+                        <div class="col col-90">{{item.projectname}} <br />{{item.tasktype}}</div>
+                        <div class="col col-10"><h3>{{item.hours}}</h3></div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(item)">
+                    Project Name : {{item.projectname}}<br />
+                    Task Type : {{item.tasktype}}<br />
+                    Description : {{item.description}}<br />
+                    Date : {{item.date}}<br />
+                </ion-item>
+            </div>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

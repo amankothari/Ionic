@@ -1,0 +1,52 @@
+﻿
+<ion-view view-title="Expenses" >
+    
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-add" ng-click="Goto()"></button>
+        <!--<a class="button button-stable" ng-click="Goto()">
+            +
+        </a>-->
+    </ion-nav-buttons>
+    <ion-content>
+
+        <div class="bar bar-header">
+            <button class="button button-icon icon ion-chevron-left" ng-click="slidePrevious()" ng-disabled="slidedisable"></button>
+            <div class="h1 title">{{date}}</div>
+            <button class="button button-icon icon ion-chevron-right" ng-click="slideNext()" ng-disabled="slidedisable"></button>
+        </div>
+        <br />
+        <br />
+        <p id="p" ng-show="expenseload">
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <div class="row" ng-show="!expenseload">
+            <div class="col col-50"></div>
+            <div class="col col-50"><h5>Total Amount: {{totalamount}} </h5></div>
+
+        </div>
+        <ion-list>
+            <div ng-repeat="expense in allExpense" ng-show="!expenseload">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(expense)"
+                          ng-class="{active: isGroupShown(expense)}">
+
+                    <br />
+                    <div class="row">
+                        <!--<div class="col"><i class="icon" ng-class="isGroupShown(expense) ? 'ion-minus' : 'ion-plus'"></i></div>-->
+                        <div class="col col-80">{{expense.description}} <br />{{expense.projectname}}</div>
+                        <div class="col col-20"><h3>{{expense.amount}}</h3></div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(expense)">
+                    Project Name : {{expense.projectname}}<br />
+                    Type : {{expense.expensetype}}<br />
+                    Description : {{expense.description}}<br />
+                    Amount : {{expense.amount}}<br />
+                    Date : {{expense.date}}
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

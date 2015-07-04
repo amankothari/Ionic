@@ -1,0 +1,28 @@
+﻿<ion-view view-title="Home">
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                Welcome <strong> {{welcome}}</strong>
+                <br /><br />
+                Thanks for logging in! We’re glad you’re here. Where would you like to go today
+            </div>
+        </div>
+        <div class="list list-inset">
+
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/findanemployee" ng-show="!authentication.isCustomer && authentication.isAuth">Find an Employee</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/timesheet" ng-show="!authentication.isCustomer && authentication.isAuth">Timesheet</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/travelrequest" ng-show="!authentication.isCustomer && authentication.isAuth">Travel Request</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/expenses" ng-show="!authentication.isCustomer && authentication.isAuth"> Expense</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/leave" ng-show="!authentication.isCustomer && authentication.isAuth">Request OOO</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/employeeprofile" ng-show="!authentication.isCustomer && authentication.isAuth">Update Profile</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/myproject" ng-show="authentication.isCustomer && authentication.isAuth">My Project</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/myprojectpreferences" ng-show="authentication.isCustomer && authentication.isAuth">My Project Preferences</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/mypreferences" ng-show="authentication.isCustomer && authentication.isAuth">My Preferences</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/profile" ng-show="authentication.isCustomer && authentication.isAuth">Profile</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/ourpromise" ng-show="authentication.isCustomer && authentication.isAuth">Our Promise</a>
+            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/upcomingevent" ng-show="authentication.isCustomer && authentication.isAuth">Upcoming Events</a>
+
+        </div>
+       
+    </ion-content>
+</ion-view>

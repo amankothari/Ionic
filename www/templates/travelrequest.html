@@ -1,0 +1,36 @@
+﻿
+<ion-view view-title="Travel Request" >
+   
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-add" ng-click="Goto()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <p id="p" ng-show="travelshow">
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <ion-list>
+            <div ng-repeat="item in alltraveldata" ng-show="!travelshow">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(item)"
+                          ng-class="{active: isGroupShown(item)}">
+
+                    <br />
+                    <div class="row responsive-sm">
+                        <!--<div class="col"><i class="icon" ng-class="isGroupShown(item) ? 'ion-minus' : 'ion-plus'"></i></div>-->
+                        <div class="col"><i class="icon ion-arrow-up-a"></i>&nbsp;{{item.departcity}}</div>
+                        <div class="col"><i class="icon ion-arrow-down-a"></i>&nbsp;{{item.arrivalcity}}</div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(item)">
+                    Departure City :{{item.departcity}}<br />
+                    Arrival City : {{item.arrivalcity}}<br />
+                    Departure Date : {{item.departdate}}<br />
+                    Arrival Date : {{item.returndate}}<br />
+                    Details : {{item.description}}<br />
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

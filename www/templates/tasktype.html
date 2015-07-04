@@ -1,0 +1,19 @@
+
+<ion-view view-title="Select Task Type">
+    <ion-content ng-init="inittasktype()">
+        <p id="p" ng-show="tasktypeload">
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <div class="list list-inset" ng-show="!tasktypeload">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" ng-model="search" placeholder="Search">
+            </label>
+        </div>
+        <ul class="list">
+            <li class="item" ng-repeat="item in TaskType | filter:search" ng-click="settasktype(item)">
+                {{item.Name}}
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-view view-title="Request OOO">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-add" ng-click="Goto()"></button>
+    </ion-nav-buttons>
+        <ion-content>
+            <p id="p" ng-show="leaveshow">
+                <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+            </p>
+            <ion-list>
+                <div ng-repeat="item in allleavedata" ng-show="!leaveshow">
+                    <ion-item class="item-stable"
+                              ng-click="toggleGroup(item)"
+                              ng-class="{active: isGroupShown(item)}">
+
+                        <br />
+                        <div class="row responsive-sm">
+                            <!--<div class="col"><i class="icon" ng-class="isGroupShown(item) ? 'ion-minus' : 'ion-plus'"></i></div>-->
+                            <div class="col">Reason : {{item.reason}}<br />Start Date : {{item.fromdate}}<br />
+                        End Date : {{item.enddate}}<br /></div>
+                            <!--<div class="col">Approved Or Denied : {{item.ReasonForAppDec}}</div>-->
+                        </div>
+                    </ion-item>
+                    <ion-item class="item-accordion"
+                              ng-show="isGroupShown(item)">
+                        <!--Employee Name :{{item.EmployeeName}}<br />
+                        Department : {{item.Department}}<br />-->
+                       Emergency Email : {{item.email}}<br />
+                        Emergency Phone : {{item.phone}}<br />
+                        Start Date : {{item.fromdate}}<br />
+                        End Date : {{item.enddate}}<br />
+                        Reason : {{item.reason}}
+                    </ion-item>
+                </div>
+            </ion-list>
+        </ion-content>
+</ion-view>

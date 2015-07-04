@@ -1,0 +1,24 @@
+﻿
+<ion-view  view-title="Find an employee">
+    <ion-content ng-init="initproject()">
+        <p id="p" ng-show="employeeload" >
+            <ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>
+        </p>
+        <div class="list list-inset" ng-show="!employeeload">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" ng-model="search" placeholder="Search">
+            </label>
+        </div>
+
+        <div class="list" ng-show="!employeeload">
+            <a class="item item-avatar" ng-repeat="item in Employee | filter:search" ng-click="setEmployee(item.SystemUserId)">
+                
+                <img ng-src="{{item.ImageURl== null && '../img/user.png' ||'../img/UserPic/'+item.SystemUserId+'.jpg' }}" >
+                <!--<i class="icon ion-ios-person-outline" ></i>-->
+                <h2>{{item.FirstName }} {{item.LastName}}</h2>
+                <p>{{item.Title}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

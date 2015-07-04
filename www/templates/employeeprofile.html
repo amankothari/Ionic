@@ -1,0 +1,88 @@
+﻿
+<ion-modal-view view-title="Update Profile">
+    <ion-header-bar>
+        <h1 class="title">Update Profile</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate="novalidate"  on-valid-submit="save()">
+            <div class="list">
+                <div class="row">
+                    <div class="col col-50"><img ng-src="{{user.ImageURl == null && '../img/user.png' ||'../img/UserPic/'+user.SystemUserId+'.jpg' }}"></div>
+                    <div class="col col-50"></div>
+                </div>
+                <br />
+                <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input type="text" ng-model="user.Name" readonly>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Primary Email</span>
+                    <input type="email" ng-model="user.PrimaryEmail" readonly>
+                </label>
+                <div class="item item-divider">
+                    Address
+                </div>
+                <!--<label class="item item-input">
+                    <span class="input-label">Street1</span>
+                    <input type="text" ng-model="user.Street1" readonly>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Street2</span>
+                    <input type="text" ng-model="user.Street2" readonly>
+                </label>-->
+                <label class="item item-input validated">
+                    <span class="input-label">City</span>
+                    <input type="text" ng-model="user.City" required="required" readonly>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">State</span>
+                    <input type="text" ng-model="user.State" required="required" readonly>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Country</span>
+                    <input type="text" ng-model="user.Country" readonly>
+                </label>
+                <br />
+                <label class="item item-input validated">
+                    <span class="input-label">Phone Number </span>
+                    <input type="tel" ng-model="user.PhoneNumber" readonly>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Home Number </span>
+                    <input type="tel" ng-model="user.HomeNumber" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Alternative email </span>
+                    <input type="email" ng-model="user.AlternateEmail " required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Interests</span>
+                    <textarea id="TextArea" ng-model="user.Intrests" ng-keyup="autoExpand($event)" placeholder="notes" required="required"></textarea>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated">
+                    <span class="input-label">Number of kids</span>
+                    <input type="number" ng-model="user.NumberofKids " required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <br />
+                <div class="row">
+                    <div class="col col-50">
+                        <button class="button button-full button-positive" type="submit">Save</button>
+                       
+                    </div>
+                    <div class="col col-50">
+                        <a class="button button-full button-assertive" href="#/app/home">Cancel</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-modal-view>

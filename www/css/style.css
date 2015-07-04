@@ -1,0 +1,71 @@
+/* Empty. Add your own CSS if you like */
+/*.item {
+  font-size: 14px !important;
+}*/
+
+.company-logo {
+    vertical-align: middle;
+    max-width: 80%;
+    width:80%;
+    /*content: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/256302/ionic-logo-white.png");*/
+    /*content: url('http://m.webfortis.in/img/web-fortis-logo21.png');*/
+}
+
+
+    /*textarea css*/
+    textarea {
+  height:auto;
+  max-width:600px;
+  color:#999;
+  font-weight:400;
+  font-size:14px;
+  font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+  width:100%;
+  background:#fff;
+  border-radius:3px;
+  line-height:2em;
+  border:none;
+  box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding:30px;
+transition: height 2s ease;
+}
+
+
+
+ #p {
+        text-align: center;
+        margin-bottom: 20px !important;
+    }
+
+    .spinner svg {
+        width: 19% !important;
+        height: 85px !important;
+    }
+    .item-avatar i:first-child, .item-avatar .item-img {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 36px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    border-radius: 4px; }
+
+ form i.icon.error {
+  color: #ef4e3a; }
+
+form input + i.icon.error {
+  display: none;
+  margin-left: 8px; }
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+  display: block; }
+
+form .has-error {
+  border-left: 5px solid #cc2511; }
+
+form .has-success {
+  border-left: 5px solid #3d8b3d; }
+
+form.ng-submitted input.ng-valid + i.icon.error {
+  display: none; }
