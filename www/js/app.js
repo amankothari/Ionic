@@ -28,7 +28,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
 }])
 
 .constant('ngAuthSettings', {
-    apiServiceBaseUri: 'http://localhost:57934/',
+    //apiServiceBaseUri: 'http://localhost:57934/',
      apiServiceBaseUri: 'https://parature.webfortis.com/WebMobile/',
     //clientId: 'ngAuthApp'
 })
@@ -194,10 +194,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
          views: {
              'menuContent': {
                  templateUrl: "templates/myproject.html",
-                 //controller: 'leaveCntrl'
+                 controller: 'CustomerProjectCtrl'
              }
          }
      })
+         .state('app.profile', {
+             url: "/profile",
+             views: {
+                 'menuContent': {
+                     templateUrl: "templates/profile.html",
+                     controller: 'profileController'
+                 }
+             }
+         })
+         .state('app.ourpromise', {
+             url: "/ourpromise",
+             views: {
+                 'menuContent': {
+                     templateUrl: "templates/ourpromise.html",
+                     //controller: 'leaveCntrl'
+                 }
+             }
+         })
      .state('app.myprojectpreferences', {
          url: "/myprojectpreferences",
          views: {
@@ -216,15 +234,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
              }
          }
      })
-     .state('app.profile', {
-         url: "/profile",
-         views: {
-             'menuContent': {
-                 templateUrl: "templates/profile.html",
-                 //controller: 'leaveCntrl'
-             }
-         }
-     })
+    
     .state('app.upcomingevent', {
         url: "/upcomingevent",
         views: {
@@ -234,15 +244,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
             }
         }
     })
-    .state('app.ourpromise', {
-        url: "/ourpromise",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/ourpromise.html",
-                //controller: 'leaveCntrl'
-            }
-        }
-    })
+   
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/signin');
 });
