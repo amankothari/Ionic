@@ -204,7 +204,7 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('timeforspecificCntrl', function ($scope, $stateParams, TimesheetService, $location, $timeout, getsetService, localStorageService, getsetServiceForExpense,$rootScope, notification) {
+.controller('timeforspecificCntrl', function ($scope, $stateParams, TimesheetService, $location, $timeout, getsetService, localStorageService, getsetServiceForExpense, $rootScope, notification, getsetServiceForTravel) {
     $scope.task = {};
     $scope.Projects = {};
     $scope.TaskType = {};
@@ -285,6 +285,11 @@ angular.module('starter.controllers', [])
             getsetServiceForExpense.SetExpenseproject(input);
             $location.path('/app/expenseform');
         }
+        if($scope.type=="travel")
+        {
+            getsetServiceForTravel.Setproject(input);
+            $location.path('/app/travelrequestform');
+        } 
     }
 
     $scope.settasktype = function (input) {
@@ -462,12 +467,17 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('requestCntrl', function ($scope, $ionicModal, TravelrequestService, $location, $timeout, authService, localStorageService, $rootScope, notification) {
+.controller('requestCntrl', function ($scope, $ionicModal, TravelrequestService, $location, $timeout, authService, localStorageService, $rootScope, notification, getsetServiceForTravel) {
     $scope.alltraveldata = {};
     $scope.travel = {};
     $scope.travelshow = false;
     $scope.$on('$ionicView.enter', function () {
         getdata();
+        var Choosedate = getsetServiceForTravel.Getdata();
+        if (Choosedate.project) {
+            $scope.travel.projectname = Choosedate.project.ProjectName;
+            $scope.travel.projectguid = Choosedate.project.Id;
+        }
     })
     $scope.changekey = function (data) {
         TravelrequestService.getcities().then(function (out) {
@@ -710,5 +720,77 @@ angular.module('starter.controllers', [])
         // $cordovaCamera.cleanup().then(...); // only for FILE_URI
 
     }, false);
+
+})
+
+.controller('CustomerProjectCtrl', function ($scope, CustomerService, localStorageService) {
+    $scope.projects;
+    $scope.projectLoad = true;
+    var getProjects = CustomerService.CustomerProjects(localStorageService.get('LoggedUser').userId).then(function (result) {
+        $scope.projectLoad = true;
+        $scope.projects = result;
+    })
+})
+
+.controller('profileController', function ($scope, CustomerService, $ionicPopup, $window, localStorageService) {
+
+    $scope.Profile = {};
+
+    //This method is used for initilization the customer profile data
+    $scope.initilizationProfile = function () {
+        console.log("Initilization the profile");
+        var getProfileData = CustomerService.CustomerProfile(localStorageService.get('LoggedUser').userId).then(function (result) {
+            console.log("Controller Respond Success");
+            console.log(result);
+            $scope.Profile.Email = result.EmailAddress1;
+            $scope.Profile.HomeCellNo = result.HomeContactNo;
+            $scope.Profile.OrignalEmailAddress = result.EmailAddress1;
+        })
+    }
+
+    //this method is used for update the customer profile data
+
+    $scope.updateProfile = function (Profile) {
+        console.log("Update Profile Method is calling");
+        console.log(Profile);
+        var getUpdateRespond = CustomerService.updateProfile(Profile, localStorageService.get('LoggedUser').userId).then(function (result) {
+            console.log("Successfully Updated in controller");
+            console.log(result);
+            if (result == "Successfully") {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Message',
+                    template: 'Updated Successfully'
+                });
+                alertPopup.then(function (res) {
+                    $window.location.href = ('#/app/home');
+                    $window.location.reload();
+                });
+            }
+
+            if (result == "AlreadyExist") {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Sorry',
+                    template: 'EMail Id already Exist'
+                });
+                alertPopup.then(function (res) {
+
+                });
+            }
+
+        })
+    }
+
+
+
+    $scope.updateProfile1 = function () {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Message',
+            template: 'Updated Successfully'
+        });
+        alertPopup.then(function (res) {
+            $window.location.href = ('#/app/home');
+            $window.location.reload();
+        });
+    };
 
 })

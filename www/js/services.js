@@ -253,7 +253,21 @@ angular.module('starter.services', [])
         }
     };
 })
-
+.factory('getsetServiceForTravel', function () {
+    var tempdata = {};
+    var data = {};
+    return data = {
+        Getdata: function () {
+            return tempdata;
+        },
+        Setproject: function (input) {
+            tempdata.project = input;
+        },
+        reset: function () {
+            tempdata = {};
+        }
+    };
+})
 .factory('notification', function ($rootScope, $ionicLoading, $window) {
     $rootScope.show = function (text) {
         $rootScope.loading = $ionicLoading.show({
@@ -497,4 +511,54 @@ angular.module('starter.services', [])
     FindanEmployeeFactory.GetUserFromServer = _GetUserFromServer;
     FindanEmployeeFactory.PostUser = _PostUser;
     return FindanEmployeeFactory;
+})
+
+.factory('CustomerService', function ($q, $http, ngAuthSettings, localStorageService) {
+
+
+    var CustomerData = {};
+    var url = ngAuthSettings.apiServiceBaseUri;
+    var _CustomerProjects = function (userid) {
+        var deffred = $q.defer();
+        $http.get(url + 'api/customer/get?CustomerId=' + userid).success(function (respond) {
+            console.log("Customer Project Data is Success");
+            console.log(respond);
+            deffred.resolve(respond);
+
+        })
+        return deffred.promise;
+    }
+
+
+
+    var _CustomerProfile = function (userid) {
+        var deffred = $q.defer();
+        $http.get(url + '/api/CustomerProfile?ContactId=' + userid).success(function (respond) {
+            console.log("Customer profile Data is Success");
+            console.log(respond);
+            deffred.resolve(respond);
+
+        })
+        return deffred.promise;
+
+    }
+
+    var _updateProfile = function (Profile, userid) {
+        var deffred = $q.defer();
+        var PostData = { Id: userid, EmailAddress1: Profile.Email, HomeContactNo: Profile.HomeCellNo, OrignalEmailAddress: Profile.OrignalEmailAddress };
+        $http.post(url + '/api/CustomerProfile', PostData).success(function (respond) {
+            console.log("Customer profile Updated Data is Success");
+            console.log(respond);
+            deffred.resolve(respond);
+
+        })
+        return deffred.promise;
+    }
+
+    CustomerData.CustomerProjects = _CustomerProjects;
+    CustomerData.CustomerProfile = _CustomerProfile;
+    CustomerData.updateProfile = _updateProfile;
+
+    return CustomerData;
+
 })

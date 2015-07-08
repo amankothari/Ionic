@@ -28,6 +28,16 @@
                     <input type="date" ng-model="travel.returndate" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
+                <a href="#/app/getproject/travel">
+                    <label class="item item-input validated">
+                        <div class="input-label">
+                            Project(Optional)
+                        </div>
+                        <i class="ion-chevron-right"></i>
+                        <input type="text" ng-model="travel.projectname"  />
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </a>
                 <div class="row">
                     <div class="col col-33">Booking Required</div>
                     <div class="col">
@@ -50,11 +60,14 @@
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <div class="row">
-                    <div class="col col-50"></div>
                     <div class="col col-50">
-                        <button class="button button-light button-positive" type="submit">Save</button>
-                        <a class="button button-light button-assertive" href="#/app/home">Cancel</a>
+                        <button class="button button-full button-positive" type="submit">Save</button>
+
                     </div>
+                    <div class="col col-50">
+                        <a class="button button-full button-assertive" href="#/app/home">Cancel</a>
+                    </div>
+
                 </div>
 
             </div>
