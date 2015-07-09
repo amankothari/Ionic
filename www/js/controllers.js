@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-    
+    $scope.showEmp = true;
     $scope.authentication = {};
     $scope.authentication = localStorageService.get('LoggedUser');
     try {
@@ -34,6 +34,7 @@ angular.module('starter.controllers', [])
     }
     
     // Form data for the login modal
+  
     $scope.loginData = {
         LoginType: "Employee"
     };
@@ -43,6 +44,12 @@ angular.module('starter.controllers', [])
    { text: "Employee", value: "Employee" }
 
     ];
+
+    $scope.diffrentiateEmpCust=function(data)
+    {
+        if (data === "Employee") { $scope.showEmp = true; }
+        else if (data === "Customer") { $scope.showEmp = false; }
+    }
     $scope.callassesmentmodal = function () {
         console.log('call');
         window.location.assign("http://www.webfortis.com/maturity-model");
@@ -50,18 +57,24 @@ angular.module('starter.controllers', [])
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
-        var email = $scope.loginData.username;
-        var password = $scope.loginData.password;
-        if (!email || !password) {
-            $rootScope.notify("Please enter valid credentials");
-            return false;
+        //var empemail = $scope.loginData.empusername;
+
+        //var password = $scope.loginData.password;
+        //if (!email || !password) {
+        //    $rootScope.notify("Please enter valid credentials");
+        //    return false;
+        //}
+        var a = $scope.loginData.empusername.substring(0, $scope.loginData.empusername.indexOf("@webfortis.com"));
+        if (a) {
+            $scope.loginData.empusername = a;
         }
+        console.log(a);
         $rootScope.show('Please wait.. Authenticating');
         if ($scope.loginData.LoginType == "Employee")
         {
             $scope.PostData = {
                 ServerAddress: "crm.dynamics.com",
-                Username: $scope.loginData.username + '@webfortis.com',
+                Username: $scope.loginData.empusername + '@webfortis.com',
                 Password: $scope.loginData.password,
                 ssl: true,
                 o365: true,
@@ -73,7 +86,7 @@ angular.module('starter.controllers', [])
         {
             $scope.PostData = {
                 ServerAddress: "crm.dynamics.com",
-                Username: $scope.loginData.username,
+                Username: $scope.loginData.custusername,
                 Password: $scope.loginData.password,
                 ssl: true,
                 o365: true,
@@ -725,26 +738,32 @@ angular.module('starter.controllers', [])
 
 .controller('CustomerProjectCtrl', function ($scope, CustomerService, localStorageService) {
     $scope.projects;
-    $scope.projectLoad = true;
+    $scope.projectload = true;
     var getProjects = CustomerService.CustomerProjects(localStorageService.get('LoggedUser').userId).then(function (result) {
-        $scope.projectLoad = true;
+        $scope.projectload = false;
         $scope.projects = result;
     })
 })
 
-.controller('profileController', function ($scope, CustomerService, $ionicPopup, $window, localStorageService) {
+.controller('profileController', function ($scope, CustomerService, $ionicPopup, $window, localStorageService, $rootScope, notification, $location) {
 
     $scope.Profile = {};
 
     //This method is used for initilization the customer profile data
     $scope.initilizationProfile = function () {
-        console.log("Initilization the profile");
+        $rootScope.show("wait..");
         var getProfileData = CustomerService.CustomerProfile(localStorageService.get('LoggedUser').userId).then(function (result) {
-            console.log("Controller Respond Success");
             console.log(result);
+            $rootScope.hide();
             $scope.Profile.Email = result.EmailAddress1;
             $scope.Profile.HomeCellNo = result.HomeContactNo;
             $scope.Profile.OrignalEmailAddress = result.EmailAddress1;
+        }, function (errr) {
+            try {
+                $rootScope.notify(errr);
+            } catch (e) {
+                $rootScope.hide();
+            }
         })
     }
 
@@ -753,30 +772,44 @@ angular.module('starter.controllers', [])
     $scope.updateProfile = function (Profile) {
         console.log("Update Profile Method is calling");
         console.log(Profile);
+        $rootScope.show("updating..");
         var getUpdateRespond = CustomerService.updateProfile(Profile, localStorageService.get('LoggedUser').userId).then(function (result) {
+            $rootScope.hide();
             console.log("Successfully Updated in controller");
             console.log(result);
             if (result == "Successfully") {
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Message',
-                    template: 'Updated Successfully'
-                });
-                alertPopup.then(function (res) {
-                    $window.location.href = ('#/app/home');
-                    $window.location.reload();
-                });
+                //var alertPopup = $ionicPopup.alert({
+                //    title: 'Message',
+                //    template: 'Updated Successfully'
+                //});
+                //alertPopup.then(function (res) {
+                //    $window.location.href = ('#/app/home');
+                //    $window.location.reload();
+                //});
+               
+                $rootScope.notify("Updated Successfully");
+                $location.path('/app/home');
+            }
+            if (errr == "AlreadyExist") {
+                //var alertPopup = $ionicPopup.alert({
+                //    title: 'Sorry',
+                //    template: 'EMail Id already Exist'
+                //});
+                //alertPopup.then(function (res) {
+
+                //});
+                $rootScope.notify("EMail Id already Exist");
             }
 
-            if (result == "AlreadyExist") {
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Sorry',
-                    template: 'EMail Id already Exist'
-                });
-                alertPopup.then(function (res) {
+           
 
-                });
+        }, function (errr) {
+            try {
+                $rootScope.hide();
+                $rootScope.notify("EMail Id already Exist. Not Updated!!");
+            } catch (e) {
+                $rootScope.hide();
             }
-
         })
     }
 

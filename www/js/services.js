@@ -525,7 +525,9 @@ angular.module('starter.services', [])
             console.log(respond);
             deffred.resolve(respond);
 
-        })
+        }).error(function (err, status) {
+            deffred.reject(err);
+        });
         return deffred.promise;
     }
 
@@ -533,12 +535,14 @@ angular.module('starter.services', [])
 
     var _CustomerProfile = function (userid) {
         var deffred = $q.defer();
-        $http.get(url + '/api/CustomerProfile?ContactId=' + userid).success(function (respond) {
+        $http.get(url + 'api/CustomerProfile?ContactId=' + userid).success(function (respond) {
             console.log("Customer profile Data is Success");
             console.log(respond);
             deffred.resolve(respond);
 
-        })
+        }).error(function (err, status) {
+            deffred.reject(err);
+        });
         return deffred.promise;
 
     }
@@ -546,12 +550,14 @@ angular.module('starter.services', [])
     var _updateProfile = function (Profile, userid) {
         var deffred = $q.defer();
         var PostData = { Id: userid, EmailAddress1: Profile.Email, HomeContactNo: Profile.HomeCellNo, OrignalEmailAddress: Profile.OrignalEmailAddress };
-        $http.post(url + '/api/CustomerProfile', PostData).success(function (respond) {
+        $http.post(url + 'api/CustomerProfile', PostData).success(function (respond) {
             console.log("Customer profile Updated Data is Success");
             console.log(respond);
             deffred.resolve(respond);
 
-        })
+        }).error(function (err, status) {
+            deffred.reject(err);
+        });
         return deffred.promise;
     }
 

@@ -1,30 +1,35 @@
 <ion-view>
     <ion-nav-title>
-       
+
     </ion-nav-title>
     <ion-content>
-       
+
         <span class="item item-header margin-top-15">
             <img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" />
         </span>
-        <form  novalidate="novalidate" on-valid-submit="doLogin()" >
+        <form novalidate="novalidate" on-valid-submit="doLogin()">
             <h2><label class="item item-input" style="font-size:14px; font-weight:bold"> Login As</label></h2>
-            <ion-radio ng-repeat="item in devList" ng-value="item.value" ng-model="loginData.LoginType">{{ item.text }}</ion-radio>
+            <ion-radio ng-repeat="item in devList" ng-value="item.value" ng-model="loginData.LoginType" ng-click="diffrentiateEmpCust(loginData.LoginType)">{{ item.text }}</ion-radio>
             <div class="item item-divider">
             </div>
             <div class="list">
-                <label class="item item-input validated">
+                <label class="item item-input validated" ng-show="showEmp">
                     <span class="input-label">Username</span>
-                    <input type="text" ng-model="loginData.username" required="required" />
+                    <input type="text" ng-model="loginData.empusername" ng-required="showEmp"  />
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+                <label class="item item-input validated" ng-show="!showEmp">
+                    <span class="input-label">Email</span>
+                    <input type="email" ng-model="loginData.custusername" ng-required="!showEmp"  />
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
                     <span class="input-label">Password</span>
-                    <input type="password" ng-model="loginData.password"   required="required" />
+                    <input type="password" ng-model="loginData.password" required="required"  />
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <br />
-               
+
                 <ul class="list">
                     <li class="item item-toggle">
                         Remember me
@@ -36,19 +41,19 @@
                         </label>
                     </li>
                 </ul>
-               
+
                 <label class="item">
                     <button class="button button-block button-positive" type="submit">Log in</button>
                 </label>
-                
+
             </div>
         </form>
         <label class="item">
             <button class="button button-clear button-positive" ng-click="callassesmentmodal()">Take our Free Maturity Model Assessment</button>
         </label>
         <br />
-       
-            
-       
+
+
+
     </ion-content>
 </ion-view>
