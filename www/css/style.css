@@ -37,10 +37,10 @@ transition: height 2s ease;
         margin-top: 250px !important;
     }
 
-    /*.spinner svg {
+    .spinner svg {
         width: 19% !important;
         height: 85px !important;
-    }*/
+    }
     .item-avatar i:first-child, .item-avatar .item-img {
     position: absolute;
     top: 15px;
