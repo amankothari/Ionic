@@ -64,14 +64,15 @@ angular.module('starter.controllers', [])
         //    $rootScope.notify("Please enter valid credentials");
         //    return false;
         //}
-        var a = $scope.loginData.empusername.substring(0, $scope.loginData.empusername.indexOf("@webfortis.com"));
-        if (a) {
-            $scope.loginData.empusername = a;
-        }
-        console.log(a);
+       
+       
         $rootScope.show('Please wait.. Authenticating');
         if ($scope.loginData.LoginType == "Employee")
         {
+            var a = $scope.loginData.empusername.substring(0, $scope.loginData.empusername.indexOf("@webfortis.com"));
+            if (a) {
+                $scope.loginData.empusername = a;
+            }
             $scope.PostData = {
                 ServerAddress: "crm.dynamics.com",
                 Username: $scope.loginData.empusername + '@webfortis.com',
