@@ -17,7 +17,8 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
- 
+  <icon src="icon.png" gap:role="default" />
+  <gap:splash src="weirdo.png" />
 </widget>
 
 
