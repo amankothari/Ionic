@@ -1,33 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns   = "http://www.w3.org/ns/widgets"
-    xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.phonegap.example"
-    versionCode = "10"
-    version     = "1.0.0" >
-
-  <!-- versionCode is optional and Android only -->
-
-  <name>PhoneGap Example</name>
-
-  <description>
-    An example for phonegap build docs.
-  </description>
-
-  <author href="https://build.phonegap.com" email="support@phonegap.com">
-    Hardeep Shoker
-  </author>
-  <gap:platform name="ios" />
-  <gap:platform name="android" />
-  <gap:platform name="winphone" />
-</widget>
-<!--<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.webfortis809600" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>webfortis</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Webfortis mobile app
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="akothari@webfortis.com" href="http://webfortis.in/">
+      WFI Team India
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -39,7 +17,7 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  <icon src="ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
-</widget>-->
+ 
+</widget>
 
 
