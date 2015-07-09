@@ -1,7 +1,7 @@
 ﻿
 <ion-view view-title="Select Project">
-    <ion-content ng-init="initproject">
-        <p id="p" ng-show="projectload()">
+    <ion-content ng-init="initproject()">
+        <p id="p" ng-show="projectload">
             <ion-spinner icon="android"></ion-spinner>
         </p>
         <div class="list list-inset" ng-show="!projectload" >
