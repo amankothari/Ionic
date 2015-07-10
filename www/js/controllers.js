@@ -332,6 +332,8 @@ angular.module('starter.controllers', [])
 
     $scope.save = function () {
         $rootScope.show('saving..');
+        $scope.task.hours = $scope.task.hours + "." + $scope.task.minutes;
+        console.log($scope.task);
         TimesheetService.Savetimesheet($scope.task).then(function (out) {
             $rootScope.hide();
             $location.path('/app/timesheet');
