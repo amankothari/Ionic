@@ -69,7 +69,7 @@ angular.module('starter.services', [])
 
         }
         var _logOut = function () {
-            localStorageService.clearAll();
+            localStorageService.remove('AudienceData', 'LoggedUser', 'Token');
             _authentication.isAuth = false;
             _authentication.isCustomer = false;
             _authentication.userName = "";
@@ -232,9 +232,10 @@ angular.module('starter.services', [])
     return TimesheetServiceFactory;
 })
 
-.factory('getsetService', function () {
+.factory('getsetService', function ($injector) {
     var tempdata = {};
     var data = {};
+    var recentitem = $injector.get('recentitem');
     return data = {
         Getdata: function () {
             return tempdata;
@@ -244,30 +245,121 @@ angular.module('starter.services', [])
         },
         Setproject: function (input) {
             tempdata.project = input;
+            recentitem.setrecentproject(input);
         },
         SetTasktype: function (input) {
             tempdata.tasktype = input;
+            recentitem.setrecenttasktype(input);
         },
         reset: function () {
             tempdata = {};
         }
     };
 })
-.factory('getsetServiceForTravel', function () {
+
+.factory('recentitem', function ($injector, localStorageService) {
+    var tempdata = {};
+    var data = [];
+    var datafortasktype = [];
+    var dataforexpense = [];
+    var _setrecentproject = function (input) {
+        var nameofcookie= 'p_'+ localStorageService.get('LoggedUser').userId;
+        if (localStorageService.get(nameofcookie)){
+            data = [];
+            data = localStorageService.get(nameofcookie);
+            var status=_.filter(data,function(o){
+                return o.Id == input.Id;
+            })
+            console.log(status);
+            if (status.length==0) {
+                data.push(input);
+            }
+        } else {
+            data.push(input)
+        }
+        localStorageService.set(nameofcookie, data);
+      
+        console.log(localStorageService.get(nameofcookie));
+        };
+    var _recentproject = function () {
+
+        var nameofcookie = 'p_' + localStorageService.get('LoggedUser').userId;
+        var data = localStorageService.get(nameofcookie);
+        return data ;
+    };
+    var _setrecenttasktype = function (input) {
+        var nameofcookie = 't_' + localStorageService.get('LoggedUser').userId;
+        if (localStorageService.get(nameofcookie)) {
+            datafortasktype = [];
+            datafortasktype = localStorageService.get(nameofcookie);
+            var status = _.filter(datafortasktype, function (o) {
+                return o.Id == input.Id;
+            })
+            console.log(status);
+            if (status.length == 0) {
+                datafortasktype.push(input);
+            }
+        } else {
+            datafortasktype.push(input)
+        }
+        localStorageService.set(nameofcookie, datafortasktype);
+        console.log(localStorageService.get(nameofcookie));
+    };
+    var _recenttasktype = function () {
+        var nameofcookie = 't_' + localStorageService.get('LoggedUser').userId;
+        var data = localStorageService.get(nameofcookie, datafortasktype);
+        return data;
+    };
+    var _setrecentexpense = function (input) {
+        var nameofcookie = 'e_' + localStorageService.get('LoggedUser').userId;
+        if (localStorageService.get(nameofcookie)) {
+            dataforexpense = [];
+            dataforexpense = localStorageService.get(nameofcookie);
+            var status = _.filter(dataforexpense, function (o) {
+                return o.Id == input.Id;
+            })
+            console.log(status);
+            if (status.length == 0) {
+                dataforexpense.push(input);
+            }
+        } else {
+            dataforexpense.push(input)
+        }
+        localStorageService.set(nameofcookie,dataforexpense);
+        console.log(localStorageService.get(nameofcookie));
+    };
+    var _recentexpense = function () {
+        var nameofcookie = 'e_' + localStorageService.get('LoggedUser').userId;
+        var data = localStorageService.get(nameofcookie);
+        return data;
+    };
+        tempdata.setrecentproject = _setrecentproject;
+        tempdata.recentproject = _recentproject;
+        tempdata.setrecenttasktype = _setrecenttasktype;
+        tempdata.recenttasktype = _recenttasktype;
+        tempdata.setrecentexpense = _setrecentexpense;
+        tempdata.recentexpense = _recentexpense;
+        return tempdata;
+})
+
+.factory('getsetServiceForTravel', function ($injector) {
     var tempdata = {};
     var data = {};
+    var recentitem = $injector.get('recentitem');
     return data = {
         Getdata: function () {
             return tempdata;
         },
         Setproject: function (input) {
             tempdata.project = input;
+            recentitem.setrecentproject(input);
         },
         reset: function () {
             tempdata = {};
         }
     };
 })
+
 .factory('notification', function ($rootScope, $ionicLoading, $window) {
     $rootScope.show = function (text) {
         $rootScope.loading = $ionicLoading.show({
@@ -379,9 +471,10 @@ angular.module('starter.services', [])
 
 
 
-.factory('getsetServiceForExpense', function ($rootScope) {
+.factory('getsetServiceForExpense', function ($rootScope, $injector) {
      var tempdata = {};
      var data = {};
+     var recentitem = $injector.get('recentitem');
      return data = {
          GetExpensedata: function () {
              return tempdata;
@@ -391,9 +484,11 @@ angular.module('starter.services', [])
          },
          SetExpenseproject: function (input) {
              tempdata.ProjectName = input;
+             recentitem.setrecentproject(input);
          },
          SetExpenseCategory: function (input) {
              tempdata.CategoryName = input;
+             recentitem.setrecentexpense(input);
          },
          reset: function () {
              tempdata = {};

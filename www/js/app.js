@@ -188,6 +188,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
                  }
              }
          })
+    
     //Page for Customer
      .state('app.myproject', {
          url: "/myproject",

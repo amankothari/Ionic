@@ -218,10 +218,12 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('timeforspecificCntrl', function ($scope, $stateParams, TimesheetService, $location, $timeout, getsetService, localStorageService, getsetServiceForExpense, $rootScope, notification, getsetServiceForTravel) {
+.controller('timeforspecificCntrl', function ($scope, $stateParams, TimesheetService, $location, $timeout, getsetService,recentitem, localStorageService, getsetServiceForExpense, $rootScope, notification, getsetServiceForTravel) {
     $scope.task = {};
     $scope.Projects = {};
     $scope.TaskType = {};
+    $scope.recentproject = {};
+    $scope.recenttab = true;
     $scope.projectload = false;
     $scope.tasktypeload = false;
     $scope.$on('$ionicView.enter', function () {
@@ -252,9 +254,17 @@ angular.module('starter.controllers', [])
     $scope.type = $stateParams.type;
     
 
+    $scope.recentinitproject = function () {
+        $scope.recentinitproject = recentitem.recentproject();
+        if ($scope.recentinitproject == null) {
+            $scope.recenttab = false;
+            $scope.initproject();
+        }
+    }
     $scope.initproject = function () {
         //console.log("call");
         //Get all Project
+        $scope.recenttab = false;
         $scope.projectload = true;
         var type = 'active';
         TimesheetService.GetProject(type).then(function (success) {
@@ -269,10 +279,17 @@ angular.module('starter.controllers', [])
             }
         })
     }
-
+    $scope.recentinittasktype = function () {
+        $scope.recentinittasktype = recentitem.recenttasktype();
+        if ($scope.recentinittasktype ==null) {
+            $scope.recenttab = false;
+            $scope.inittasktype();
+        }
+    }
     $scope.inittasktype = function () {
         //console.log("call");
         //Get all task type
+        $scope.recenttab = false;
         $scope.tasktypeload = true;
         TimesheetService.GetTaskType().then(function (success) {
             $scope.tasktypeload = false;
@@ -332,12 +349,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory,$rootScope,notification, CategoryService, $location, $timeout,notification, getsetServiceForExpense, authService,localStorageService, $ionicActionSheet) {
+.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory,$rootScope,notification,recentitem, CategoryService, $location, $timeout,notification, getsetServiceForExpense, authService,localStorageService, $ionicActionSheet) {
    
 
         $scope.expense = {};
         $scope.allExpense = {};
         $scope.Categories = {};
+        $scope.recenttab = true;
         $scope.expenseload = false;
         $scope.categoryload = false;
         $scope.totalamount = '';
@@ -389,7 +407,15 @@ angular.module('starter.controllers', [])
             }
 
         })
-        $scope.initCategory = function () {
+     $scope.initrecentCategory = function () {
+         $scope.recentinitcategory = recentitem.recentexpense();
+         if ($scope.recentinitcategory == null) {
+             $scope.recenttab = false;
+             $scope.initCategory();
+         }
+        }
+     $scope.initCategory = function () {
+         $scope.recenttab = false;
             $scope.categoryload = true;
             CategoryService.Getcategory().then(function (out) {
                 $scope.Categories = out;

@@ -1,20 +1,37 @@
 ﻿
 <ion-view view-title="Select Expense Category">
-    <ion-content ng-init="initCategory()">
-        <p id="p" ng-show="categoryload">
-            <!--<ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>-->
-            <ion-spinner icon="android"></ion-spinner>
-        </p>
-        <div class="list list-inset" ng-show="!categoryload">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" ng-model="search" placeholder="Search">
-            </label>
+    <ion-content>
+        <div class="list" ng-show="recenttab" ng-init="initrecentCategory()">
+            <div class="item item-divider">
+                Recent Expense type
+            </div>
+            <ul class="list">
+                <li class="item" ng-repeat="cat in recentinitcategory" ng-click="setcategory(cat)">
+                    {{cat.Name}}
+                </li>
+            </ul>
+            <div class="item item-divider" ng-click="initCategory()">
+                More..
+            </div>
         </div>
-        <ul class="list">
-            <li class="item" ng-repeat="cat in Categories | filter:search" ng-click="setcategory(cat)">
-                {{cat.Name}}
-            </li>
-        </ul>
+        <div ng-show="!recenttab">
+            <p id="p" ng-show="categoryload">
+                <!--<ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>-->
+                <ion-spinner icon="android"></ion-spinner>
+            </p>
+            <div class="list list-inset" ng-show="!categoryload">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" ng-model="search" placeholder="Search">
+                </label>
+            </div>
+            <ul class="list">
+                <li class="item" ng-repeat="cat in Categories | filter:search" ng-click="setcategory(cat)">
+                    {{cat.Name}}
+                </li>
+            </ul>
+
+        </div>
+       
     </ion-content>
 </ion-view>

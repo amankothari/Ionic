@@ -1,20 +1,42 @@
 
 <ion-view view-title="Select Task Type">
-    <ion-content ng-init="inittasktype()">
-        <p id="p" ng-show="tasktypeload">
-            <!--<ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>-->
-            <ion-spinner icon="android"></ion-spinner>
-        </p>
-        <div class="list list-inset" ng-show="!tasktypeload">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" ng-model="search" placeholder="Search">
-            </label>
+    <ion-content >
+
+        <div class="list" ng-show="recenttab" ng-init="recentinittasktype()">
+            <div class="item item-divider">
+                Recent task type
+            </div>
+            <!--<a class="item item-avatar" ng-repeat="item in recentinittasktype" ng-click="settasktype(item)">
+                <img src="../img/user.png">
+                <i class="icon ion-ios-folder-outline"></i>
+                <h2>{{item.ProjectName }}</h2>
+                <p>{{item.ProjectCode}}</p>
+            </a>-->
+            <ul class="list">
+                <li class="item" ng-repeat="item in recentinittasktype" ng-click="settasktype(item)">
+                    {{item.Name}}
+                </li>
+            </ul>
+            <div class="item item-divider" ng-click="inittasktype()">
+                More..
+            </div>
         </div>
-        <ul class="list">
-            <li class="item" ng-repeat="item in TaskType | filter:search" ng-click="settasktype(item)">
-                {{item.Name}}
-            </li>
-        </ul>
+        <div ng-show="!recenttab">
+            <p id="p" ng-show="tasktypeload">
+                <!--<ion-spinner icon="bubbles" class="spinner-calm"></ion-spinner>-->
+                <ion-spinner icon="android"></ion-spinner>
+            </p>
+            <div class="list list-inset" ng-show="!tasktypeload">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" ng-model="search" placeholder="Search">
+                </label>
+            </div>
+            <ul class="list">
+                <li class="item" ng-repeat="item in TaskType | filter:search" ng-click="settasktype(item)">
+                    {{item.Name}}
+                </li>
+            </ul>
+        </div>
     </ion-content>
 </ion-view>
