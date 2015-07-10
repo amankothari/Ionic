@@ -14,7 +14,7 @@
         </div>
         <div class="list" ng-show="!projectload">
             <a class="item item-avatar" ng-repeat="item in projects | filter:search" ng-click="setEmployee(item.Id)">
-                <img src="../img/user.png">
+                <i class="icon ion-ios-folder-outline"></i>
                 <h2>{{item.ProjectName }} </h2>
                 <p>{{item.ProjectCode}}</p>
             </a>
