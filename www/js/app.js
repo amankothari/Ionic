@@ -23,7 +23,8 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
         setTimeout(function () {
             $cordovaSplashscreen.hide()
         }, 5000)
-    })
+})
+
 .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 })
