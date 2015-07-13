@@ -2,9 +2,26 @@
     <ion-content>
         <div class="card">
             <div class="item item-text-wrap">
-                Welcome <strong> {{welcome}}</strong>
-                <br /><br />
-                Thanks for logging in! We’re glad you’re here. Where would you like to go today
+                <div class="row">
+                    <div class="col-75"> Welcome <strong> {{welcome}}</strong></div>
+                    <div class="col-25"><strong>{{time}}</strong></div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-100">Thanks for logging in! We’re glad you’re here.</div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-50"><img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" /></div>
+                    <div class="col-25"></div>
+                    <div class="col-25">
+                        <weather-icon cloudiness="{{ weather.clouds }}"></weather-icon>
+                        <h3>{{ weather.temp.current | temp:2 }}</h3>
+                    </div>
+                </div>
+
+
             </div>
         </div>
         <div class="list list-inset">
@@ -23,6 +40,6 @@
             <!--<a class="button button-block button-light icon-right ion-chevron-right" href="#/app/upcomingevent" ng-show="authentication.isCustomer && authentication.isAuth">Upcoming Events</a>-->
 
         </div>
-       
+
     </ion-content>
 </ion-view>

@@ -1,18 +1,38 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, authService, localStorageService, $location, $ionicHistory, $rootScope, notification, $ionicSideMenuDelegate, $window) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, authService, localStorageService, $location, $ionicHistory, $rootScope, notification, $ionicSideMenuDelegate, $window, weatherService) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
+
+    //Show time
+   
+    $scope.showtime = function () {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        $scope.time = h + ":" + m;
+        var t = setTimeout(function () { $scope.showtime() }, 500);
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+    }
+    $scope.showtime();
+    //weather controller
+        $scope.weather = weatherService.getWeather("indore");
     $scope.showEmp = true;
     $scope.authentication = {};
     $scope.authentication = localStorageService.get('LoggedUser');
     try {
         if ($scope.authentication.isAuth) {
-            $scope.welcome = $scope.authentication.userName;
+            $scope.welcome = $scope.authentication.userName.substring(0, $scope.authentication.userName.indexOf("@webfortis.com"));
             if ($scope.authentication.isCustomer) {
                 $window.location.href = ('#/app/home');
             }
