@@ -3,8 +3,8 @@
         <div class="card">
             <div class="item item-text-wrap">
                 <div class="row">
-                    <div class="col-75"> Welcome <strong> {{welcome}}</strong></div>
-                    <div class="col-25"><strong>{{time}}</strong></div>
+                    <div class="col-80"> Welcome <strong> {{welcome}}</strong></div>
+                    <div class="col-20"><strong>{{time}}</strong></div>
                 </div>
                 <br />
                 <div class="row">
@@ -14,8 +14,8 @@
                 <br />
                 <div class="row">
                     <div class="col-50"><img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" /></div>
-                    <div class="col-25"></div>
-                    <div class="col-25">
+                    <div class="col-33"></div>
+                    <div class="col-10">
                         <weather-icon cloudiness="{{ weather.clouds }}"></weather-icon>
                         <h3>{{ weather.temp.current | temp:2 }}</h3>
                     </div>
