@@ -663,9 +663,10 @@ angular.module('starter.services', [])
 
 .factory('weatherService', function ($http) {
     return {
-        getWeather: function (value) {
+        getWeather: function (lat,lon) {
             var weather = { temp: {}, clouds: null };
-            $http.jsonp('http://api.openweathermap.org/data/2.5/weather?q='+value+'&units=imperial&callback=JSON_CALLBACK').success(function (data) {
+            var url = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&units=imperial&callback=JSON_CALLBACK';
+            $http.jsonp(url).success(function (data) {
                 if (data) {
                     if (data.main) {
                         weather.temp.current = data.main.temp;

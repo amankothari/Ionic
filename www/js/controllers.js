@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, authService, localStorageService, $location, $ionicHistory, $rootScope, notification, $ionicSideMenuDelegate, $window, weatherService) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, authService, localStorageService, $location, $ionicHistory, $rootScope, notification, $ionicSideMenuDelegate, $window,$cordovaGeolocation, weatherService) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -25,8 +25,49 @@ angular.module('starter.controllers', [])
         }
     }
     $scope.showtime();
-    //weather controller
-        $scope.weather = weatherService.getWeather("indore");
+
+
+    //GEo location
+    var posOptions = { timeout: 10000, enableHighAccuracy: false };
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+          var lat = position.coords.latitude
+          var long = position.coords.longitude
+          //weather controller
+          $scope.weather = weatherService.getWeather(lat, long);
+      }, function (err) {
+          // error
+      });
+
+
+    var watchOptions = {
+        frequency: 1000,
+        timeout: 3000,
+        enableHighAccuracy: false // may cause errors if true
+    };
+
+    var watch = $cordovaGeolocation.watchPosition(watchOptions);
+    watch.then(
+      null,
+      function (err) {
+          // error
+      },
+      function (position) {
+          var lat = position.coords.latitude
+          var long = position.coords.longitude
+      });
+
+
+    //watch.clearWatch();
+    //// OR
+    //$cordovaGeolocation.clearWatch(watch)
+    //  .then(function (result) {
+    //      // success
+    //  }, function (error) {
+    //      // error
+    //  });
+   
     $scope.showEmp = true;
     $scope.authentication = {};
     $scope.authentication = localStorageService.get('LoggedUser');
