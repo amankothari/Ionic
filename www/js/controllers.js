@@ -837,39 +837,30 @@ angular.module('starter.controllers', [])
     $scope.show = function () {
 
         // Show the action sheet
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [
-              { text: 'From Camera' },
-              { text: 'From File Manager' }
-            ],
-           // destructiveText: 'Delete',
-            titleText: 'Upload Your Image',
-            cancelText: 'Cancel',
-            cancel: function () {
-                // add cancel code..
-            },
-            buttonClicked: function (index) {
-                console.log(index);
-                if (index == 0) {
-                    $scope.addImage();
-                }
-                else if(index==1)
-                {
-
-                }
-            }
-        });
-
-
-
-       
-
-     
+        var options = {
+            title: 'Upload Your Image',
+            buttonLabels: ['From Camera', 'From File Manager'],
+            addCancelButtonWithLabel: 'Cancel',
+            androidEnableCancelButton: true,
+            winphoneEnableCancelButton: true,
+            //addDestructiveButtonWithLabel: 'Delete it'
+        };
+        document.addEventListener("deviceready", function () {
+            $cordovaActionSheet.show(options)
+              .then(function (btnIndex) {
+                  var index = btnIndex;
+                  console.log(index);
+                  if (index == 0) {
+                      $scope.addImage();
+                  }
+                  else if (index == 1) {
+                  }
+              });
+        }, false);
         //// For example's sake, hide the sheet after two seconds
         //$timeout(function () {
         //    hideSheet();
         //}, 2000);
-
     };
 })
 //for upload image
