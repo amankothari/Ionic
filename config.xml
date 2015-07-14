@@ -38,7 +38,7 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <icon src="icon.png" />
-  <gap:splash src="screen.png" />
+  <gap:splash src="splash.png" />
   <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
   <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
   <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
