@@ -728,7 +728,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService,$cordovaCamera,$cordovaFile, $ionicActionSheet) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $ionicActionSheet, $cordovaActionSheet) {
     $scope.user = {};
     getdata();
     function getdata() {
@@ -835,7 +835,7 @@ angular.module('starter.controllers', [])
     //open actionsheet
     // Triggered on a button click, or some other target
     $scope.show = function () {
-
+        console.log('call');
         // Show the action sheet
         var options = {
             title: 'Upload Your Image',
@@ -857,6 +857,7 @@ angular.module('starter.controllers', [])
                   }
               });
         }, false);
+       
         //// For example's sake, hide the sheet after two seconds
         //$timeout(function () {
         //    hideSheet();
