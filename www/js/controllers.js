@@ -850,10 +850,10 @@ angular.module('starter.controllers', [])
               .then(function (btnIndex) {
                   var index = btnIndex;
                   console.log(index);
-                  if (index == 0) {
+                  if (index == 1) {
                       $scope.addImage();
                   }
-                  else if (index == 1) {
+                  else if (index ==2) {
                   }
               });
         }, false);
