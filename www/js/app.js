@@ -19,11 +19,13 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
         }
     });
 })
-.run(function ($cordovaSplashscreen) {
-        setTimeout(function () {
-            $cordovaSplashscreen.hide();
-        }, 5000)
-})
+
+//.run(function ($cordovaSplashscreen) {
+//    $cordovaSplashscreen.show();
+//        setTimeout(function () {
+//            $cordovaSplashscreen.hide();
+//        }, 5000)
+//})
 
 .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');

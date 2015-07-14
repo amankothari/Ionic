@@ -59,7 +59,6 @@
             cloudiness: '@'
         },
         controller: function ($scope) {
-            console.log($scope);
             $scope.imgurl = function () {
                 var baseUrl = 'https://ssl.gstatic.com/onebox/weather/32/';
 

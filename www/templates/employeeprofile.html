@@ -1,8 +1,8 @@
 ﻿
-<ion-modal-view view-title="Update Profile">
-    <ion-header-bar>
-        <h1 class="title">Update Profile</h1>
-    </ion-header-bar>
+<ion-view view-title="Update Profile">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-ios-camera-outline" ng-click="show()"></button>
+    </ion-nav-buttons>
     <ion-content>
         <form novalidate="novalidate" on-valid-submit="save()">
             <div class="list">
@@ -10,7 +10,8 @@
                     <div class="col col-50">
                         <img ng-src="{{user.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+user.SystemUserId+'.jpg' }}">
                     </div>
-                    <div class="col col-50"></div>
+                    <div class="col col-50">
+                    </div>
                 </div>
                 <br />
                 <label class="item item-input">
@@ -25,13 +26,13 @@
                     Address
                 </div>
                 <!--<label class="item item-input">
-                <span class="input-label">Street1</span>
-                <input type="text" ng-model="user.Street1" readonly>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Street2</span>
-                <input type="text" ng-model="user.Street2" readonly>
-            </label>-->
+                    <span class="input-label">Street1</span>
+                    <input type="text" ng-model="user.Street1" readonly>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Street2</span>
+                    <input type="text" ng-model="user.Street2" readonly>
+                </label>-->
                 <label class="item item-input validated">
                     <span class="input-label">City</span>
                     <input type="text" ng-model="user.City" required="required" readonly>
@@ -87,4 +88,4 @@
         </form>
 
     </ion-content>
-</ion-modal-view>
+</ion-view>

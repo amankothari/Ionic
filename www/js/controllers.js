@@ -5,69 +5,12 @@ angular.module('starter.controllers', [])
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
     // listen for the $ionicView.enter event:
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+    $scope.$on('$ionicView.enter', function (e) {
+       
+    });
 
-    //Show time
-   
-    $scope.showtime = function () {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        $scope.time = h + ":" + m;
-        var t = setTimeout(function () { $scope.showtime() }, 500);
-        function checkTime(i) {
-            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-            return i;
-        }
-    }
-    $scope.showtime();
-
-
-    //GEo location
-    var posOptions = { timeout: 10000, enableHighAccuracy: false };
-    $cordovaGeolocation
-      .getCurrentPosition(posOptions)
-      .then(function (position) {
-          var lat = position.coords.latitude
-          var long = position.coords.longitude
-          //weather controller
-          $scope.weather = weatherService.getWeather(lat, long);
-      }, function (err) {
-          // error
-      });
-
-
-    var watchOptions = {
-        frequency: 1000,
-        timeout: 3000,
-        enableHighAccuracy: false // may cause errors if true
-    };
-
-    var watch = $cordovaGeolocation.watchPosition(watchOptions);
-    watch.then(
-      null,
-      function (err) {
-          // error
-      },
-      function (position) {
-          var lat = position.coords.latitude
-          var long = position.coords.longitude
-      });
-
-
-    //watch.clearWatch();
-    //// OR
-    //$cordovaGeolocation.clearWatch(watch)
-    //  .then(function (result) {
-    //      // success
-    //  }, function (error) {
-    //      // error
-    //  });
-   
+    CallEveryTime();
+    
     $scope.showEmp = true;
     $scope.authentication = {};
     $scope.authentication = localStorageService.get('LoggedUser');
@@ -95,7 +38,6 @@ angular.module('starter.controllers', [])
     }
     
     // Form data for the login modal
-  
     $scope.loginData = {
         LoginType: "Employee"
     };
@@ -112,8 +54,7 @@ angular.module('starter.controllers', [])
         else if (data === "Customer") { $scope.showEmp = false; }
     }
     $scope.callassesmentmodal = function () {
-        console.log('call');
-        window.location.assign("http://www.webfortis.com/maturity-model");
+        window.open('http://www.webfortis.com/maturity-model', '_system', 'location=yes'); return false;
     }
 
     // Perform the login action when the user submits the login form
@@ -165,10 +106,12 @@ angular.module('starter.controllers', [])
                 $scope.welcome = $scope.authentication.userName;
                 $rootScope.hide();
                 $window.location.href = ('#/app/home');
-                $window.location.reload();
+                
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
+                $window.location.reload();
+                
             })
         }, function (errr) {
             try {
@@ -180,6 +123,75 @@ angular.module('starter.controllers', [])
         })
        
     };
+
+    //call after Successfully Login
+    function CallEveryTime() {
+        //Show time
+
+        $scope.showtime = function () {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            $scope.time = h + ":" + m;
+            var t = setTimeout(function () { $scope.showtime() }, 500);
+            function checkTime(i) {
+                if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+                return i;
+            }
+        }
+        $scope.showtime();
+
+
+        //GEo location
+        var posOptions = { timeout: 10000, enableHighAccuracy: false };
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+              var lat = position.coords.latitude
+              var long = position.coords.longitude
+              console.log(lat + ':' + long);
+              //weather controller
+              $scope.weather = weatherService.getWeather(lat, long);
+          }, function (err) {
+              $rootScope.notify(err.message);
+              console.log(err.message);
+          });
+
+
+        var watchOptions = {
+            frequency: 1000,
+            timeout: 3000,
+            enableHighAccuracy: false // may cause errors if true
+        };
+
+        var watch = $cordovaGeolocation.watchPosition(watchOptions);
+        console.log(watch);
+        watch.then(
+          null,
+          function (err) {
+              $rootScope.notify(err.message);
+              console.log(err.message);
+          },
+          function (position) {
+              var lat = position.coords.latitude
+              var long = position.coords.longitude
+              //weather controller
+              $scope.weather = weatherService.getWeather(lat, long);
+          });
+
+
+        //watch.clearWatch();
+        //// OR
+        //$cordovaGeolocation.clearWatch(watch)
+        //  .then(function (result) {
+        //      // success
+        //  }, function (error) {
+        //      // error
+        //  });
+    }
 
     $scope.logout = function () {
         authService.logOut();
@@ -412,7 +424,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory,$rootScope,notification,recentitem, CategoryService, $location, $timeout,notification, getsetServiceForExpense, authService,localStorageService, $ionicActionSheet) {
+.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory,$rootScope,notification,recentitem, CategoryService, $location, $timeout,notification, getsetServiceForExpense, authService,localStorageService) {
    
 
         $scope.expense = {};
@@ -510,33 +522,7 @@ angular.module('starter.controllers', [])
         }
 
 
-        //open actionsheet
-        // Triggered on a button click, or some other target
-        $scope.show = function () {
-
-            // Show the action sheet
-            var hideSheet = $ionicActionSheet.show({
-                buttons: [
-                  { text: '<b>Share</b> This' },
-                  { text: 'Move' }
-                ],
-                destructiveText: 'Delete',
-                titleText: 'Modify your album',
-                cancelText: 'Cancel',
-                cancel: function () {
-                    // add cancel code..
-                },
-                buttonClicked: function (index) {
-                    return true;
-                }
-            });
-
-            // For example's sake, hide the sheet after two seconds
-            $timeout(function () {
-                hideSheet();
-            }, 2000);
-
-        };
+    
 
     //function for Get Expense data for specfic date
         function getdata(date1) {
@@ -742,7 +728,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService,$cordovaCamera,$cordovaFile, $ionicActionSheet) {
     $scope.user = {};
     getdata();
     function getdata() {
@@ -778,6 +764,113 @@ angular.module('starter.controllers', [])
         })
     }
 
+    $scope.images = [];
+    //Post Image Function
+    $scope.addImage = function () {
+        // 2
+        var options = {
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+            allowEdit: false,
+            encodingType: Camera.EncodingType.JPEG,
+            popoverOptions: CameraPopoverOptions,
+        };
+
+        // 3
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+
+            // 4
+            onImageSuccess(imageData);
+
+            function onImageSuccess(fileURI) {
+                createFileEntry(fileURI);
+            }
+
+            function createFileEntry(fileURI) {
+                window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
+            }
+
+            // 5
+            function copyFile(fileEntry) {
+                var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
+                var newName = makeid() + name;
+
+                window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
+                    fileEntry.copyTo(
+                    fileSystem2,
+                    newName,
+                    onCopySuccess,
+                    fail
+                    );
+                },
+                fail);
+            }
+
+            // 6
+            function onCopySuccess(entry) {
+                $scope.$apply(function () {
+                    $scope.images.push(entry.nativeURL);
+                });
+            }
+
+            function fail(error) {
+                console.log("fail: " + error.code);
+            }
+
+            function makeid() {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < 5; i++) {
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+                return text;
+            }
+
+        }, function (err) {
+            console.log(err);
+        });
+    }
+
+    //open actionsheet
+    // Triggered on a button click, or some other target
+    $scope.show = function () {
+
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+              { text: 'From Camera' },
+              { text: 'From File Manager' }
+            ],
+           // destructiveText: 'Delete',
+            titleText: 'Upload Your Image',
+            cancelText: 'Cancel',
+            cancel: function () {
+                // add cancel code..
+            },
+            buttonClicked: function (index) {
+                console.log(index);
+                if (index == 0) {
+                    $scope.addImage();
+                }
+                else if(index==1)
+                {
+
+                }
+            }
+        });
+
+
+
+       
+
+     
+        //// For example's sake, hide the sheet after two seconds
+        //$timeout(function () {
+        //    hideSheet();
+        //}, 2000);
+
+    };
 })
 //for upload image
 .controller('PictureCtrl', function ($scope, $cordovaCamera) {
@@ -806,7 +899,6 @@ angular.module('starter.controllers', [])
     }, false);
 
     document.addEventListener("deviceready", function () {
-
         var options = {
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.CAMERA,
