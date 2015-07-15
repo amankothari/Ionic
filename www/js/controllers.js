@@ -800,12 +800,13 @@ angular.module('starter.controllers', [])
                 filePath = imageData;
 
             var date = new Date();
-
+            var header={'Authorization':"Beare " + localStorageService.get('Token').access_token};
             var options = {
                 fileKey: "file",
                 fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
                 chunkedMode: false,
-                mimeType: "image/jpg"
+                mimeType: "image/jpg",
+                headers: header
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
@@ -816,7 +817,7 @@ angular.module('starter.controllers', [])
 
             }, function(err) {
                 console.log("ERROR: " + JSON.stringify(err));
-                //alert(JSON.stringify(err));
+                alert(JSON.stringify(err));
             }, function (progress) {
                 // constant progress updates
             });
