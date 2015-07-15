@@ -797,28 +797,30 @@ angular.module('starter.controllers', [])
             };
 
         }
-        
+        $rootScope.show("uploading...");
         $cordovaCamera.getPicture(options).then(function (imageData) {
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
             var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId;
             $scope.picData = imageData;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
+            options.fileName =localStorageService.get('LoggedUser').userId,
             options.fileKey = "post";
             options.chunkedMode = false;
             options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
             var ft = new FileTransfer();
             ft.upload(myImg, encodeURI(server),onUploadSuccess, onUploadFail, options);
         }, function (err) {
-            alert(JSON.stringify(err));
+            $rootScope.notify(JSON.stringify(err));
         });
 
         function onUploadSuccess(data) {
-            alert("success");
+            var image = document.getElementById('profilepic');
+            image.src = imageData;
+            $rootScope.notify("uploaded successfully");
         }
         function onUploadFail(data) {
-            alert(JSON.stringify(data));
-            alert("Failed");
+            $rootScope.notify("uploaded failed");
         }
         //// 3
         //$cordovaCamera.getPicture(options).then(function (imageData) {
@@ -882,10 +884,6 @@ angular.module('starter.controllers', [])
               });
         }, false);
        
-        //// For example's sake, hide the sheet after two seconds
-        //$timeout(function () {
-        //    hideSheet();
-        //}, 2000);
     };
 })
 //for upload image
