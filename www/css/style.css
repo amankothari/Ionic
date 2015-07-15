@@ -69,3 +69,7 @@ form .has-success {
 
 form.ng-submitted input.ng-valid + i.icon.error {
   display: none; }
+
+ .loading-container .loading {
+    background-color:  transparent !important;
+     }

@@ -104,13 +104,13 @@ angular.module('starter.controllers', [])
             authService.gettoken().then(function (tokenresponse) {
                 $scope.authentication = localStorageService.get('LoggedUser');
                 $scope.welcome = $scope.authentication.userName;
-                $rootScope.hide();
-                $window.location.href = ('#/app/home');
+                //$rootScope.hide();
+                //$window.location.href = ('#/app/home');
                 
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
-                $window.location.reload();
+                //$window.location.reload();
                 
             })
         }, function (errr) {
@@ -728,7 +728,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
     $scope.user = {};
     getdata();
     function getdata() {
@@ -795,12 +795,12 @@ angular.module('starter.controllers', [])
             //console.log(options);   
             var image = document.getElementById('profilepic');
             image.src = imageData;  
-
-            var server = "http://yourdomain.com/upload.php",
+            var serviceBase = ngAuthSettings.apiServiceBaseUri;
+            var server = url+"api/upload",
                 filePath = imageData;
 
             var date = new Date();
-            var header={'Authorization':"Beare " + localStorageService.get('Token').access_token};
+            var header={'Authorization':"Bearer " + localStorageService.get('Token').access_token};
             var options = {
                 fileKey: "file",
                 fileName: imageData.substr(imageData.lastIndexOf('/') + 1),

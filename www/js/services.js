@@ -360,10 +360,11 @@ angular.module('starter.services', [])
     };
 })
 
-.factory('notification', function ($rootScope, $ionicLoading, $window) {
+.factory('notification', function ($rootScope, $ionicLoading, $window, $cordovaToast) {
+   // template: text ? '<p class="item-icon-left">' + text + '<ion-spinner icon="android"></ion-spinner></p>' : '<p class="item-icon-left">Loading..<ion-spinner icon="android"></ion-spinner></p>',
     $rootScope.show = function (text) {
         $rootScope.loading = $ionicLoading.show({
-            template: text ? text : "Loading..",
+            template: text ? "<ion-spinner icon='android'></ion-spinner>" : "<ion-spinner icon='android'></ion-spinner>",
             animation: 'fade-in',
             showBackdrop: true,
             maxWidth: 200,
@@ -374,10 +375,16 @@ angular.module('starter.services', [])
         $ionicLoading.hide();
     };
     $rootScope.notify = function (text) {
-        $rootScope.show(text);
-        $window.setTimeout(function () {
-            $rootScope.hide();
-        }, 1999);
+        $cordovaToast.showLongBottom(Text).then(function (success) {
+            // success
+        }, function (error) {
+            // error
+        });
+
+        //$rootScope.show(text);
+        //$window.setTimeout(function () {
+        //    $rootScope.hide();
+        //}, 1999);
     };
 
     return {
