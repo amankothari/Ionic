@@ -114,10 +114,8 @@ angular.module('starter.controllers', [])
                 
             })
         }, function (errr) {
-            console.log(errr);
             try {
                 $rootScope.notify(errr.Message);
-               
             } catch (e) {
                 $rootScope.hide();
             }

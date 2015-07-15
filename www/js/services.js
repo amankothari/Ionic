@@ -366,8 +366,8 @@ angular.module('starter.services', [])
         $rootScope.loading = $ionicLoading.show({
             template: text ? "<ion-spinner icon='android'></ion-spinner>" : "<ion-spinner icon='android'></ion-spinner>",
             animation: 'fade-in',
-            showBackdrop: false,
-            //maxWidth: 200,
+            showBackdrop: true,
+            maxWidth: 200,
             showDelay: 0
         });
     };
