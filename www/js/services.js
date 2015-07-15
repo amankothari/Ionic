@@ -375,8 +375,8 @@ angular.module('starter.services', [])
         $ionicLoading.hide();
     };
     $rootScope.notify = function (text) {
-        $cordovaToast.showLongBottom(Text).then(function (success) {
-            console.log(Text);
+        $cordovaToast.showLongBottom(text).then(function (success) {
+            console.log(text);
             // success
         }, function (error) {
             // error
