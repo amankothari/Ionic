@@ -106,7 +106,6 @@ angular.module('starter.controllers', [])
                 $scope.welcome = $scope.authentication.userName;
                 $rootScope.hide();
                 $window.location.href = ('#/app/home');
-                
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
@@ -115,6 +114,7 @@ angular.module('starter.controllers', [])
             })
         }, function (errr) {
             try {
+                $rootScope.hide();
                 $rootScope.notify(errr.Message);
             } catch (e) {
                 $rootScope.hide();
