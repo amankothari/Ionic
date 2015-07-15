@@ -799,9 +799,9 @@ angular.module('starter.controllers', [])
             var image = document.getElementById('profilepic');
             image.src = imageData;  
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
-            var server = url + "api/upload",
+            var server = serviceBase + "api/upload",
                 filePath = imageData;
-            try {
+           
                 var date = new Date();
                 var header = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
                 var options = {
@@ -827,12 +827,6 @@ angular.module('starter.controllers', [])
                         // constant progress updates
                     });
                 })
-            }
-            catch (e) {
-                alert(JSON.stringify(e));
-            }
-           
-
         }, function(err) {
             // error
             console.log(err);
@@ -857,13 +851,7 @@ angular.module('starter.controllers', [])
             $cordovaActionSheet.show(options)
               .then(function (btnIndex) {
                   var index = btnIndex;
-                  console.log(index);
-                  if (index == 1) {
                       $scope.addImage(index);
-                  }
-                  else if (index == 2) {
-                      $scope.addImage(index);
-                  }
               });
         }, false);
        
