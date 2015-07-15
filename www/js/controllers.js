@@ -796,14 +796,14 @@ angular.module('starter.controllers', [])
             var image = document.getElementById('profilepic');
             image.src = imageData;  
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
-            var server = url+"api/upload",
+            var server = url + "api/upload",
                 filePath = imageData;
 
             var date = new Date();
             var header={'Authorization':"Bearer " + localStorageService.get('Token').access_token};
             var options = {
                 fileKey: "file",
-                fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
+                fileName: localStorageService.get('LoggedUser').userId,
                 chunkedMode: false,
                 mimeType: "image/jpg",
                 headers: header
