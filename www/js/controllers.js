@@ -805,7 +805,7 @@ angular.module('starter.controllers', [])
             $scope.picData = imageData;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName =localStorageService.get('LoggedUser').userId,
+            options.fileName =localStorageService.get('LoggedUser').userId+".jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
             options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
