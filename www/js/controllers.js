@@ -769,6 +769,12 @@ angular.module('starter.controllers', [])
     //Post Image Function
     $scope.addImage = function (index) {
         // 2
+        //var options = {
+        //    quality: 50,
+        //    destinationType: Camera.DestinationType.FILE_URI,
+        //    sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+        //    encodingType: 0     // 0=JPG 1=PNG
+        //}
         if (index == 1) {
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
@@ -792,45 +798,66 @@ angular.module('starter.controllers', [])
 
         }
         
-        // 3
         $cordovaCamera.getPicture(options).then(function (imageData) {
-            //console.log(imageData);
-            //console.log(options);   
-            var image = document.getElementById('profilepic');
-            image.src = imageData;  
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
-            var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId,
-                filePath = imageData;
-           
-                var date = new Date();
-                var header = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
-                var options = {
-                    fileKey: "file",
-                    // fileName: localStorageService.get('LoggedUser').userId,
-                    fileName: imageData.substr(imageUriToUpload.lastIndexOf('/')+1),
-                    chunkedMode: false,
-                    mimeType: "image/jpg",
-                    headers: header,
-                    chunkedMode: true
-                };
-                document.addEventListener('deviceready', function () {
-                    $cordovaFileTransfer.upload(server, filePath, options).then(function (result) {
-                        console.log("SUCCESS: " + JSON.stringify(result.response));
-                        console.log('Result_' + result.response[0] + '_ending');
-                        alert("success");
-                        alert(JSON.stringify(result.response));
-
-                    }, function (err) {
-                        console.log("ERROR: " + JSON.stringify(err));
-                        alert(JSON.stringify(err));
-                    }, function (progress) {
-                        // constant progress updates
-                    });
-                })
-        }, function(err) {
-            // error
-            console.log(err);
+            var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId;
+            $scope.picData = imageData;
+            var myImg = $scope.picData;
+            var options = new FileUploadOptions();
+            options.fileKey = "post";
+            options.chunkedMode = false;
+            options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
+            var ft = new FileTransfer();
+            ft.upload(myImg, encodeURI(server),onUploadSuccess, onUploadFail, options);
+        }, function (err) {
+            alert(JSON.stringify(err));
         });
+
+        function onUploadSuccess(data) {
+            alert("success");
+        }
+        function onUploadFail(data) {
+            alert(JSON.stringify(data));
+            alert("Failed");
+        }
+        //// 3
+        //$cordovaCamera.getPicture(options).then(function (imageData) {
+        //    //console.log(imageData);
+        //    //console.log(options);   
+        //    var image = document.getElementById('profilepic');
+        //    image.src = imageData;  
+        //    var serviceBase = ngAuthSettings.apiServiceBaseUri;
+        //    var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId,
+        //        filePath = imageData;
+        //        var date = new Date();
+        //        var header = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
+        //        var options = {
+        //            fileKey: "file",
+        //            // fileName: localStorageService.get('LoggedUser').userId,
+        //            fileName: imageData.substr(imageUriToUpload.lastIndexOf('/')+1),
+        //            chunkedMode: false,
+        //            mimeType: "image/jpg",
+        //            headers: header,
+        //            chunkedMode: true
+        //        };
+        //        document.addEventListener('deviceready', function () {
+        //            $cordovaFileTransfer.upload(server, filePath, options).then(function (result) {
+        //                console.log("SUCCESS: " + JSON.stringify(result.response));
+        //                console.log('Result_' + result.response[0] + '_ending');
+        //                alert("success");
+        //                alert(JSON.stringify(result.response));
+
+        //            }, function (err) {
+        //                console.log("ERROR: " + JSON.stringify(err));
+        //                alert(JSON.stringify(err));
+        //            }, function (progress) {
+        //                // constant progress updates
+        //            });
+        //        })
+        //}, function(err) {
+        //    // error
+        //    console.log(err);
+        //});
      
     }
 
