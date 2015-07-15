@@ -702,8 +702,8 @@ angular.module('starter.controllers', [])
     getdata();
     $scope.singleuser = FindanEmployeeService.getsingleuser();
     function getdata() {
+        $ionicHistory.clearHistory();
         $scope.employeeload = true;
-        
         FindanEmployeeService.Allemployee().then(function (success) {
             $scope.employeeload = false;
             $scope.Employee = success;
@@ -728,11 +728,12 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
     $scope.user = {};
     getdata();
     function getdata() {
         $rootScope.show("wait..");
+        $ionicHistory.clearHistory();
         FindanEmployeeService.GetUserFromServer(localStorageService.get('LoggedUser').userId).then(function (success) {
             $rootScope.hide();
             console.log(success);
