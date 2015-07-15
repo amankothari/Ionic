@@ -364,7 +364,7 @@ angular.module('starter.services', [])
    // template: text ? '<p class="item-icon-left">' + text + '<ion-spinner icon="android"></ion-spinner></p>' : '<p class="item-icon-left">Loading..<ion-spinner icon="android"></ion-spinner></p>',
     $rootScope.show = function (text) {
         $rootScope.loading = $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner></p>',
+            template: text ? text : "Loading..",
             animation: 'fade-in',
             showBackdrop: true,
             maxWidth: 200,
