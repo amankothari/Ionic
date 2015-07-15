@@ -799,30 +799,34 @@ angular.module('starter.controllers', [])
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
             var server = url + "api/upload",
                 filePath = imageData;
+            try {
+                var date = new Date();
+                var header = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
+                var options = {
+                    fileKey: "file",
+                    fileName: localStorageService.get('LoggedUser').userId,
+                    chunkedMode: false,
+                    mimeType: "image/jpg",
+                    headers: header
+                };
 
-            var date = new Date();
-            var header={'Authorization':"Bearer " + localStorageService.get('Token').access_token};
-            var options = {
-                fileKey: "file",
-                fileName: localStorageService.get('LoggedUser').userId,
-                chunkedMode: false,
-                mimeType: "image/jpg",
-                headers: header
-            };
+                $cordovaFileTransfer.upload(server, filePath, options).then(function (result) {
+                    console.log("SUCCESS: " + JSON.stringify(result.response));
+                    console.log('Result_' + result.response[0] + '_ending');
+                    alert("success");
+                    alert(JSON.stringify(result.response));
 
-            $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-                console.log("SUCCESS: " + JSON.stringify(result.response));
-                console.log('Result_' + result.response[0] + '_ending');
-                alert("success");
-                alert(JSON.stringify(result.response));
+                }, function (err) {
+                    console.log("ERROR: " + JSON.stringify(err));
+                    alert(JSON.stringify(err));
+                }, function (progress) {
+                    // constant progress updates
+                });
 
-            }, function(err) {
-                console.log("ERROR: " + JSON.stringify(err));
-                alert(JSON.stringify(err));
-            }, function (progress) {
-                // constant progress updates
-            });
-
+            } catch (e) {
+                alert(JSON.stringify(e));
+            }
+           
 
         }, function(err) {
             // error
