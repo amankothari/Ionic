@@ -766,6 +766,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.images = [];
+    $scope.picData = "";
     //Post Image Function
     $scope.addImage = function (index) {
         // 2
@@ -816,7 +817,7 @@ angular.module('starter.controllers', [])
 
         function onUploadSuccess(data) {
             var image = document.getElementById('profilepic');
-            image.src = imageData;
+            image.src = $scope.picData;
             $rootScope.notify("uploaded successfully");
         }
         function onUploadFail(data) {
