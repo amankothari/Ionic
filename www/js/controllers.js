@@ -728,7 +728,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $ionicActionSheet, $cordovaActionSheet) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
     $scope.user = {};
     getdata();
     function getdata() {
@@ -791,58 +791,42 @@ angular.module('starter.controllers', [])
         
         // 3
         $cordovaCamera.getPicture(options).then(function (imageData) {
+            //console.log(imageData);
+            //console.log(options);   
+            var image = document.getElementById('profilepic');
+            image.src = imageData;  
 
-            // 4
-            onImageSuccess(imageData);
+            var server = "http://yourdomain.com/upload.php",
+                filePath = imageData;
 
-            function onImageSuccess(fileURI) {
-                createFileEntry(fileURI);
-            }
+            var date = new Date();
 
-            function createFileEntry(fileURI) {
-                window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
-            }
+            var options = {
+                fileKey: "file",
+                fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
+                chunkedMode: false,
+                mimeType: "image/jpg"
+            };
 
-            // 5
-            function copyFile(fileEntry) {
-                var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
-                var newName = makeid() + name;
+            $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
+                console.log("SUCCESS: " + JSON.stringify(result.response));
+                console.log('Result_' + result.response[0] + '_ending');
+                alert("success");
+                alert(JSON.stringify(result.response));
 
-                window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
-                    fileEntry.copyTo(
-                    fileSystem2,
-                    newName,
-                    onCopySuccess,
-                    fail
-                    );
-                },
-                fail);
-            }
+            }, function(err) {
+                console.log("ERROR: " + JSON.stringify(err));
+                //alert(JSON.stringify(err));
+            }, function (progress) {
+                // constant progress updates
+            });
 
-            // 6
-            function onCopySuccess(entry) {
-                $scope.$apply(function () {
-                    $scope.images.push(entry.nativeURL);
-                });
-            }
 
-            function fail(error) {
-                console.log("fail: " + error.code);
-            }
-
-            function makeid() {
-                var text = "";
-                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-                for (var i = 0; i < 5; i++) {
-                    text += possible.charAt(Math.floor(Math.random() * possible.length));
-                }
-                return text;
-            }
-
-        }, function (err) {
+        }, function(err) {
+            // error
             console.log(err);
         });
+     
     }
 
     //open actionsheet

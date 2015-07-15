@@ -8,7 +8,7 @@
             <div class="list">
                 <div class="row">
                     <div class="col col-50">
-                        <img ng-src="{{user.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+user.SystemUserId+'.jpg' }}">
+                        <img id="profilepic" ng-src="{{user.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+user.SystemUserId+'.jpg' }}">
                     </div>
                     <div class="col col-50">
                     </div>
@@ -16,7 +16,7 @@
                 <br />
                 <label class="item item-input">
                     <span class="input-label">Name</span>
-                    <input type="text" ng-model="user.Name" readonly>
+                    <input type="text" ng-moprofiledel="user.Name" readonly>
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Primary Email</span>
