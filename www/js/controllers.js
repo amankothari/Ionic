@@ -104,18 +104,20 @@ angular.module('starter.controllers', [])
             authService.gettoken().then(function (tokenresponse) {
                 $scope.authentication = localStorageService.get('LoggedUser');
                 $scope.welcome = $scope.authentication.userName;
-                //$rootScope.hide();
-                //$window.location.href = ('#/app/home');
+                $rootScope.hide();
+                $window.location.href = ('#/app/home');
                 
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
-                //$window.location.reload();
+                $window.location.reload();
                 
             })
         }, function (errr) {
+            console.log(errr);
             try {
                 $rootScope.notify(errr.Message);
+               
             } catch (e) {
                 $rootScope.hide();
             }

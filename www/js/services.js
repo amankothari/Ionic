@@ -366,8 +366,8 @@ angular.module('starter.services', [])
         $rootScope.loading = $ionicLoading.show({
             template: text ? "<ion-spinner icon='android'></ion-spinner>" : "<ion-spinner icon='android'></ion-spinner>",
             animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 200,
+            showBackdrop: false,
+            //maxWidth: 200,
             showDelay: 0
         });
     };
@@ -376,6 +376,7 @@ angular.module('starter.services', [])
     };
     $rootScope.notify = function (text) {
         $cordovaToast.showLongBottom(Text).then(function (success) {
+            console.log(Text);
             // success
         }, function (error) {
             // error
