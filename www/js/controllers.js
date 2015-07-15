@@ -799,7 +799,7 @@ angular.module('starter.controllers', [])
             var image = document.getElementById('profilepic');
             image.src = imageData;  
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
-            var server = serviceBase + "api/upload",
+            var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId,
                 filePath = imageData;
            
                 var date = new Date();
