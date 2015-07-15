@@ -816,6 +816,7 @@ angular.module('starter.controllers', [])
         });
 
         function onUploadSuccess(data) {
+            $rootScope.hide();
             var image = document.getElementById('profilepic');
             image.src = $scope.picData;
             $rootScope.notify("uploaded successfully");
