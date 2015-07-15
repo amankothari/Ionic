@@ -766,16 +766,29 @@ angular.module('starter.controllers', [])
 
     $scope.images = [];
     //Post Image Function
-    $scope.addImage = function () {
+    $scope.addImage = function (index) {
         // 2
-        var options = {
-            destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
-            allowEdit: false,
-            encodingType: Camera.EncodingType.JPEG,
-            popoverOptions: CameraPopoverOptions,
-        };
+        if (index == 1) {
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+                allowEdit: false,
+                encodingType: Camera.EncodingType.JPEG,
+                popoverOptions: CameraPopoverOptions,
+            };
 
+        }
+        if (index == 2) {
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
+                allowEdit: false,
+                encodingType: Camera.EncodingType.JPEG,
+                popoverOptions: CameraPopoverOptions,
+            };
+
+        }
+        
         // 3
         $cordovaCamera.getPicture(options).then(function (imageData) {
 
@@ -851,9 +864,10 @@ angular.module('starter.controllers', [])
                   var index = btnIndex;
                   console.log(index);
                   if (index == 1) {
-                      $scope.addImage();
+                      $scope.addImage(index);
                   }
-                  else if (index ==2) {
+                  else if (index == 2) {
+                      $scope.addImage(index);
                   }
               });
         }, false);
