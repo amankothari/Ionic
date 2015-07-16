@@ -30,7 +30,6 @@ angular.module('starter.controllers', [])
 
     }
     catch (err) {
-        alert(err);
         $location.path('/app/signin');
     }
     

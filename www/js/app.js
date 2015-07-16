@@ -11,11 +11,9 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
-            alert("windows cordova");
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
-            alert("window.StatusBa");
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
