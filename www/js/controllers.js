@@ -695,9 +695,8 @@ angular.module('starter.controllers', [])
 
 .controller('FindanEmployee', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification,localStorageService) {
     $scope.Employee = {};
+    $scope.date = new Date().getTime();
     $scope.$on('$ionicView.enter', function (e) {
-        $ionicHistory.clearCache();
-        $ionicHistory.clearHistory();
         getdata();
     });
     //get all user
@@ -731,8 +730,8 @@ angular.module('starter.controllers', [])
 
 .controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
     $scope.$on('$ionicView.enter', function (e) {
-        $ionicHistory.clearCache();
-        $ionicHistory.clearHistory();
+        //$ionicHistory.clearCache();
+        //$ionicHistory.clearHistory();
         getdata();
     });
     $scope.user = {};
@@ -751,7 +750,7 @@ angular.module('starter.controllers', [])
             }
         })
     }
-
+    $scope.date = new Date().getTime();
     $scope.save = function () {
         $rootScope.show('saving..');
         $scope.user.SystemUserId = localStorageService.get('LoggedUser').userId;
