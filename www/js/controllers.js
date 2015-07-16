@@ -783,8 +783,6 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                 allowEdit: false,
-                targetWidth: 100,
-                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 quality: 30
@@ -795,8 +793,6 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: false,
-                targetWidth: 100,
-                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 quality:30
