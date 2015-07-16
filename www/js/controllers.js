@@ -781,9 +781,11 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                 allowEdit: false,
+                targetWidth: 100,
+                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality: 50
+                quality: 10
             };
         }
         if (index == 2) {
@@ -791,9 +793,11 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: false,
+                targetWidth: 100,
+                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality:50
+                quality:10
             };
         }
        
@@ -804,7 +808,7 @@ angular.module('starter.controllers', [])
             $scope.picData = imageData;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName = (localStorageService.get('LoggedUser').userId)+'.JPG',
+            options.fileName =(localStorageService.get('LoggedUser').userId)+'.JPG',
             options.mimeType= "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
