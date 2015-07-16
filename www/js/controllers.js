@@ -785,7 +785,6 @@ angular.module('starter.controllers', [])
                 popoverOptions: CameraPopoverOptions,
                 quality: 50
             };
-
         }
         if (index == 2) {
             var options = {
@@ -796,16 +795,16 @@ angular.module('starter.controllers', [])
                 popoverOptions: CameraPopoverOptions,
                 quality:50
             };
-
         }
-        $rootScope.show("uploading...");
+       
         $cordovaCamera.getPicture(options).then(function (imageData) {
+            $rootScope.show("uploading...");
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
             var server = serviceBase + "api/upload?userid=" + localStorageService.get('LoggedUser').userId;
             $scope.picData = imageData;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName = localStorageService.get('LoggedUser').userId ,
+            options.fileName = (localStorageService.get('LoggedUser').userId)+'.JPG',
             options.mimeType= "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
