@@ -12,11 +12,13 @@ angular.module('starter.controllers', [])
     $scope.authentication = localStorageService.get('LoggedUser');
     try {
         if ($scope.authentication.isAuth) {
-            $scope.welcome = $scope.authentication.userName.substring(0, $scope.authentication.userName.indexOf("@webfortis.com"));
+            
             if ($scope.authentication.isCustomer) {
+                $scope.welcome = $scope.authentication.userName;
                 $window.location.href = ('#/app/home');
             }
             else if (!$scope.authentication.isCustomer) {
+                $scope.welcome = $scope.authentication.userName.substring(0, $scope.authentication.userName.indexOf("@webfortis.com"));
                 $window.location.href = ('#/app/home');
             }
         }
