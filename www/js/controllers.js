@@ -696,13 +696,14 @@ angular.module('starter.controllers', [])
 .controller('FindanEmployee', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification,localStorageService) {
     $scope.Employee = {};
     $scope.$on('$ionicView.enter', function (e) {
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
         getdata();
     });
     //get all user
     getdata();
     $scope.singleuser = FindanEmployeeService.getsingleuser();
     function getdata() {
-        $ionicHistory.clearHistory();
         $scope.employeeload = true;
         FindanEmployeeService.Allemployee().then(function (success) {
             $scope.employeeload = false;
@@ -730,12 +731,13 @@ angular.module('starter.controllers', [])
 
 .controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
     $scope.$on('$ionicView.enter', function (e) {
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
         getdata();
     });
     $scope.user = {};
     function getdata() {
         $rootScope.show("wait..");
-        $ionicHistory.clearHistory();
         FindanEmployeeService.GetUserFromServer(localStorageService.get('LoggedUser').userId).then(function (success) {
             $rootScope.hide();
             console.log(success);
@@ -783,9 +785,11 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                 allowEdit: false,
+                targetWidth: 250,
+                targetHeight: 200,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality: 30
+                quality: 50
             };
         }
         if (index == 2) {
@@ -793,9 +797,11 @@ angular.module('starter.controllers', [])
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: false,
+                targetWidth: 250,
+                targetHeight: 200,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality:30
+                quality:50
             };
         }
        
