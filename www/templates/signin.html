@@ -4,7 +4,7 @@
     </ion-nav-title>
     <ion-content>
 
-        <!--<span class="item item-header margin-top-15">
+        <span class="item item-header margin-top-15">
             <img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" />
         </span>
         <form novalidate="novalidate" on-valid-submit="doLogin()">
@@ -51,44 +51,6 @@
         <label class="item">
             <button class="button button-clear button-positive" ng-click="callassesmentmodal()">Take our Free Maturity Model Assessment</button>
         </label>
-        <br />-->
-
-
-        <div class="card">
-            <div class="item item-text-wrap">
-                <div class="row">
-                    <div class="col"> Welcome <strong> {{welcome}}</strong></div>
-                    <div class="col"><strong>{{time}}</strong></div>
-                </div>
-                <div class="row">
-                    <div class="col">Thanks for logging in! We’re glad you’re here.</div>
-                </div>
-                <div class="row">
-                    <div class="col"><img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" /></div>
-                    <div class="col">
-                        <weather-icon cloudiness="{{ weather.clouds }}"></weather-icon>
-                        <h3>{{ weather.temp.current | temp:2 }}</h3>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="list list-inset">
-
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/findanemployee" ng-show="!authentication.isCustomer && authentication.isAuth">Find an Employee</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/timesheet" ng-show="!authentication.isCustomer && authentication.isAuth">Timesheet</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/travelrequest" ng-show="!authentication.isCustomer && authentication.isAuth">Travel Request</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/expenses" ng-show="!authentication.isCustomer && authentication.isAuth"> Expense</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/leave" ng-show="!authentication.isCustomer && authentication.isAuth">Request OOO</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/employeeprofile" ng-show="!authentication.isCustomer && authentication.isAuth">Update Profile</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/myproject" ng-show="authentication.isCustomer && authentication.isAuth">My Project</a>
-            <!--<a class="button button-block button-light icon-right ion-chevron-right" href="#/app/myprojectpreferences" ng-show="authentication.isCustomer && authentication.isAuth">My Project Preferences</a>
-        <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/mypreferences" ng-show="authentication.isCustomer && authentication.isAuth">My Preferences</a>-->
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/profile" ng-show="authentication.isCustomer && authentication.isAuth">Profile</a>
-            <a class="button button-block button-light icon-right ion-chevron-right" href="#/app/ourpromise" ng-show="authentication.isCustomer && authentication.isAuth">Our Promise</a>
-            <!--<a class="button button-block button-light icon-right ion-chevron-right" href="#/app/upcomingevent" ng-show="authentication.isCustomer && authentication.isAuth">Upcoming Events</a>-->
-
-        </div>
+        <br />
     </ion-content>
 </ion-view>

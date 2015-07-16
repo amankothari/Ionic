@@ -11,21 +11,17 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
+            alert("windows cordova");
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
+            alert("window.StatusBa");
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
     });
 })
 
-//.run(function ($cordovaSplashscreen) {
-//    $cordovaSplashscreen.show();
-//        setTimeout(function () {
-//            $cordovaSplashscreen.hide();
-//        }, 5000)
-//})
 
 .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
@@ -38,7 +34,7 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
 .constant('ngAuthSettings', {
    // apiServiceBaseUri: 'http://localhost:57934/',
      apiServiceBaseUri: 'https://parature.webfortis.com/WebMobile/',
-    //clientId: 'ngAuthApp'
+    clientId: 'ngAuthApp'
 })
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

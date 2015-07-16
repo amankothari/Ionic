@@ -30,6 +30,7 @@ angular.module('starter.controllers', [])
 
     }
     catch (err) {
+        alert(err);
         $location.path('/app/signin');
     }
     
@@ -176,8 +177,6 @@ angular.module('starter.controllers', [])
               //weather controller
               $scope.weather = weatherService.getWeather(lat, long);
           });
-
-
         //watch.clearWatch();
         //// OR
         //$cordovaGeolocation.clearWatch(watch)
