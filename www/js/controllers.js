@@ -695,9 +695,9 @@ angular.module('starter.controllers', [])
 
 .controller('FindanEmployee', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification,localStorageService) {
     $scope.Employee = {};
-    //$scope.$on('$ionicView.enter', function () {
-    //    getdata();
-    //})
+    $scope.$on('$ionicView.enter', function (e) {
+        getdata();
+    });
     //get all user
     getdata();
     $scope.singleuser = FindanEmployeeService.getsingleuser();
@@ -729,8 +729,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+    $scope.$on('$ionicView.enter', function (e) {
+        getdata();
+    });
     $scope.user = {};
-    getdata();
     function getdata() {
         $rootScope.show("wait..");
         $ionicHistory.clearHistory();
