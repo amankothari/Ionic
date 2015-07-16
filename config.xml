@@ -7,9 +7,9 @@
   <author email="akothari@webfortis.com" href="http://webfortis.in/">&#xD;
       WFI Team India&#xD;
     </author>
-  <!--<gap:plugin name="nl.x-services.plugins.actionsheet" version="1.1.1" />
+  <gap:plugin name="nl.x-services.plugins.actionsheet" version="1.1.1" />
   <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
-  <gap:plugin name="org.apache.cordova.camera" />
+  <!--<gap:plugin name="org.apache.cordova.camera" />
   <gap:plugin name="org.apache.cordova.file-transfer" />
   <gap:plugin name="org.apache.cordova.geolocation" />
   <gap:plugin name="org.apache.cordova.splashscreen" />-->
