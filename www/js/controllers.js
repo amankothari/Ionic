@@ -785,7 +785,7 @@ angular.module('starter.controllers', [])
                 targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality: 10
+                quality: 30
             };
         }
         if (index == 2) {
@@ -797,7 +797,7 @@ angular.module('starter.controllers', [])
                 targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
-                quality:10
+                quality:30
             };
         }
        
