@@ -5,198 +5,198 @@ angular.module('starter.controllers', [])
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
     // listen for the $ionicView.enter event:
-    //CallEveryTime();
+    CallEveryTime();
     
-   // $scope.showEmp = true;
-   // $scope.authentication = {};
-   // $scope.authentication = localStorageService.get('LoggedUser');
-   // try {
-   //     if ($scope.authentication.isAuth) {
-   //         $scope.welcome = $scope.authentication.userName.substring(0, $scope.authentication.userName.indexOf("@webfortis.com"));
-   //         if ($scope.authentication.isCustomer) {
-   //             $window.location.href = ('#/app/home');
-   //         }
-   //         else if (!$scope.authentication.isCustomer) {
-   //             $window.location.href = ('#/app/home');
-   //         }
-   //     }
-   //     else {
-   //         $window.location.href = ('#/app/signin');
-   //     }
+    $scope.showEmp = true;
+    $scope.authentication = {};
+    $scope.authentication = localStorageService.get('LoggedUser');
+    try {
+        if ($scope.authentication.isAuth) {
+            $scope.welcome = $scope.authentication.userName.substring(0, $scope.authentication.userName.indexOf("@webfortis.com"));
+            if ($scope.authentication.isCustomer) {
+                $window.location.href = ('#/app/home');
+            }
+            else if (!$scope.authentication.isCustomer) {
+                $window.location.href = ('#/app/home');
+            }
+        }
+        else {
+            $window.location.href = ('#/app/signin');
+        }
 
-   //     $ionicHistory.nextViewOptions({
-   //         disableBack: true
-   //     });
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
 
-   // }
-   // catch (err) {
-   //     $location.path('/app/signin');
-   // }
+    }
+    catch (err) {
+        $location.path('/app/signin');
+    }
     
-   // // Form data for the login modal
-   // $scope.loginData = {
-   //     LoginType: "Employee"
-   // };
-   // $scope.checked = '';
-   // $scope.devList = [
-   //{ text: "Customer", value: "Customer" },
-   //{ text: "Employee", value: "Employee" }
+    // Form data for the login modal
+    $scope.loginData = {
+        LoginType: "Employee"
+    };
+    $scope.checked = '';
+    $scope.devList = [
+   { text: "Customer", value: "Customer" },
+   { text: "Employee", value: "Employee" }
 
-   // ];
+    ];
 
-   // $scope.diffrentiateEmpCust=function(data)
-   // {
-   //     if (data === "Employee") { $scope.showEmp = true; }
-   //     else if (data === "Customer") { $scope.showEmp = false; }
-   // }
-   // $scope.callassesmentmodal = function () {
-   //     window.open('http://www.webfortis.com/maturity-model', '_system', 'location=yes'); return false;
-   // }
+    $scope.diffrentiateEmpCust=function(data)
+    {
+        if (data === "Employee") { $scope.showEmp = true; }
+        else if (data === "Customer") { $scope.showEmp = false; }
+    }
+    $scope.callassesmentmodal = function () {
+        window.open('http://www.webfortis.com/maturity-model', '_system', 'location=yes'); return false;
+    }
 
-   // // Perform the login action when the user submits the login form
-   // $scope.doLogin = function () {
-   //     //var empemail = $scope.loginData.empusername;
+    // Perform the login action when the user submits the login form
+    $scope.doLogin = function () {
+        //var empemail = $scope.loginData.empusername;
 
-   //     //var password = $scope.loginData.password;
-   //     //if (!email || !password) {
-   //     //    $rootScope.notify("Please enter valid credentials");
-   //     //    return false;
-   //     //}
+        //var password = $scope.loginData.password;
+        //if (!email || !password) {
+        //    $rootScope.notify("Please enter valid credentials");
+        //    return false;
+        //}
        
        
-   //     $rootScope.show('Please wait.. Authenticating');
-   //     if ($scope.loginData.LoginType == "Employee")
-   //     {
-   //         var a = $scope.loginData.empusername.substring(0, $scope.loginData.empusername.indexOf("@webfortis.com"));
-   //         if (a) {
-   //             $scope.loginData.empusername = a;
-   //         }
-   //         $scope.PostData = {
-   //             ServerAddress: "crm.dynamics.com",
-   //             Username: $scope.loginData.empusername + '@webfortis.com',
-   //             Password: $scope.loginData.password,
-   //             ssl: true,
-   //             o365: true,
-   //             loginType: $scope.loginData.LoginType,
-   //             useRefreshTokens: true,
-   //             rememberme: $scope.loginData.rememberme
-   //         };
-   //     } else
-   //     {
-   //         $scope.PostData = {
-   //             ServerAddress: "crm.dynamics.com",
-   //             Username: $scope.loginData.custusername,
-   //             Password: $scope.loginData.password,
-   //             ssl: true,
-   //             o365: true,
-   //             loginType: $scope.loginData.LoginType,
-   //             useRefreshTokens: true,
-   //             rememberme: $scope.loginData.rememberme
-   //         };
-   //     }
+        $rootScope.show('Please wait.. Authenticating');
+        if ($scope.loginData.LoginType == "Employee")
+        {
+            var a = $scope.loginData.empusername.substring(0, $scope.loginData.empusername.indexOf("@webfortis.com"));
+            if (a) {
+                $scope.loginData.empusername = a;
+            }
+            $scope.PostData = {
+                ServerAddress: "crm.dynamics.com",
+                Username: $scope.loginData.empusername + '@webfortis.com',
+                Password: $scope.loginData.password,
+                ssl: true,
+                o365: true,
+                loginType: $scope.loginData.LoginType,
+                useRefreshTokens: true,
+                rememberme: $scope.loginData.rememberme
+            };
+        } else
+        {
+            $scope.PostData = {
+                ServerAddress: "crm.dynamics.com",
+                Username: $scope.loginData.custusername,
+                Password: $scope.loginData.password,
+                ssl: true,
+                o365: true,
+                loginType: $scope.loginData.LoginType,
+                useRefreshTokens: true,
+                rememberme: $scope.loginData.rememberme
+            };
+        }
         
-   //     console.log($scope.PostData);
-   //     authService.login($scope.PostData).then(function (result) {
-   //         authService.gettoken().then(function (tokenresponse) {
-   //             $scope.authentication = localStorageService.get('LoggedUser');
-   //             $scope.welcome = $scope.authentication.userName;
-   //             $rootScope.hide();
-   //             $window.location.href = ('#/app/home');
-   //             $ionicHistory.nextViewOptions({
-   //                 disableBack: true
-   //             });
-   //             $window.location.reload();
+        console.log($scope.PostData);
+        authService.login($scope.PostData).then(function (result) {
+            authService.gettoken().then(function (tokenresponse) {
+                $scope.authentication = localStorageService.get('LoggedUser');
+                $scope.welcome = $scope.authentication.userName;
+                $rootScope.hide();
+                $window.location.href = ('#/app/home');
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
+                $window.location.reload();
                 
-   //         })
-   //     }, function (errr) {
-   //         try {
-   //             $rootScope.hide();
-   //             $rootScope.notify(errr.Message);
-   //         } catch (e) {
-   //             $rootScope.hide();
-   //         }
+            })
+        }, function (errr) {
+            try {
+                $rootScope.hide();
+                $rootScope.notify(errr.Message);
+            } catch (e) {
+                $rootScope.hide();
+            }
            
-   //     })
+        })
        
-   // };
+    };
 
-   // //call after Successfully Login
-   // function CallEveryTime() {
-   //     //Show time
+    //call after Successfully Login
+    function CallEveryTime() {
+        //Show time
 
-   //     $scope.showtime = function () {
-   //         var today = new Date();
-   //         var h = today.getHours();
-   //         var m = today.getMinutes();
-   //         var s = today.getSeconds();
-   //         m = checkTime(m);
-   //         s = checkTime(s);
-   //         $scope.time = h + ":" + m;
-   //         var t = setTimeout(function () { $scope.showtime() }, 500);
-   //         function checkTime(i) {
-   //             if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-   //             return i;
-   //         }
-   //     }
-   //     $scope.showtime();
-   //     //$scope.weather = weatherService.getWeather("22.746413699999998", "75.9172791");
-   //     //GEo location
-   //     var posOptions = { timeout: 10000, enableHighAccuracy: false };
-   //     $cordovaGeolocation
-   //       .getCurrentPosition(posOptions)
-   //       .then(function (position) {
-   //           var lat = position.coords.latitude
-   //           var long = position.coords.longitude
-   //           console.log(lat + ':' + long);
-   //           //weather controller
-   //           $scope.weather = weatherService.getWeather(lat, long);
-   //       }, function (err) {
-   //           $rootScope.notify(err.message);
-   //           console.log(err.message);
-   //       });
+        $scope.showtime = function () {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            $scope.time = h + ":" + m;
+            var t = setTimeout(function () { $scope.showtime() }, 500);
+            function checkTime(i) {
+                if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+                return i;
+            }
+        }
+        $scope.showtime();
+        //$scope.weather = weatherService.getWeather("22.746413699999998", "75.9172791");
+        //GEo location
+        var posOptions = { timeout: 10000, enableHighAccuracy: false };
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+              var lat = position.coords.latitude
+              var long = position.coords.longitude
+              console.log(lat + ':' + long);
+              //weather controller
+              $scope.weather = weatherService.getWeather(lat, long);
+          }, function (err) {
+              $rootScope.notify(err.message);
+              console.log(err.message);
+          });
 
 
-   //     var watchOptions = {
-   //         frequency: 1000,
-   //         timeout: 3000,
-   //         enableHighAccuracy: false // may cause errors if true
-   //     };
+        var watchOptions = {
+            frequency: 1000,
+            timeout: 3000,
+            enableHighAccuracy: false // may cause errors if true
+        };
 
-   //     var watch = $cordovaGeolocation.watchPosition(watchOptions);
-   //     console.log(watch);
-   //     watch.then(
-   //       null,
-   //       function (err) {
-   //           $rootScope.notify(err.message);
-   //           console.log(err.message);
-   //       },
-   //       function (position) {
-   //           var lat = position.coords.latitude
-   //           var long = position.coords.longitude
-   //           //weather controller
-   //           $scope.weather = weatherService.getWeather(lat, long);
-   //       });
-   //     //watch.clearWatch();
-   //     //// OR
-   //     //$cordovaGeolocation.clearWatch(watch)
-   //     //  .then(function (result) {
-   //     //      // success
-   //     //  }, function (error) {
-   //     //      // error
-   //     //  });
-   // }
+        var watch = $cordovaGeolocation.watchPosition(watchOptions);
+        console.log(watch);
+        watch.then(
+          null,
+          function (err) {
+              $rootScope.notify(err.message);
+              console.log(err.message);
+          },
+          function (position) {
+              var lat = position.coords.latitude
+              var long = position.coords.longitude
+              //weather controller
+              $scope.weather = weatherService.getWeather(lat, long);
+          });
+        //watch.clearWatch();
+        //// OR
+        //$cordovaGeolocation.clearWatch(watch)
+        //  .then(function (result) {
+        //      // success
+        //  }, function (error) {
+        //      // error
+        //  });
+    }
 
-   // $scope.logout = function () {
-   //     authService.logOut();
-   //     $scope.welcome = "";
-   //     $window.location.href =('#/app/signin');
-   //     $scope.authentication = localStorageService.get('LoggedUser');
-   //     $ionicHistory.nextViewOptions({
-   //         disableBack: true
-   //     });
-   // }
+    $scope.logout = function () {
+        authService.logOut();
+        $scope.welcome = "";
+        $window.location.href =('#/app/signin');
+        $scope.authentication = localStorageService.get('LoggedUser');
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+    }
 
-   // $scope.$ionicSideMenuDelegate = $ionicSideMenuDelegate;
+    $scope.$ionicSideMenuDelegate = $ionicSideMenuDelegate;
 })
 
 .controller('timeCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, TimesheetService,notification, $location, $timeout, getsetService, authService, localStorageService) {
