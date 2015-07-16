@@ -5,7 +5,7 @@
     <ion-content>
         <div class="list list-inset">
             <div ng-repeat="item in singleuser">
-                <img style="width:100px;height:100px;" ng-src="{{item.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+item.SystemUserId+'.jpg' }}">
+                <img style="width:100px;height:100px;" ng-src="{{item.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+item.SystemUserId+'.jpg?'+date }}">
                 <div class="item">
                     First Name : {{item.FirstName }} {{item.LastName}}<br />
                     Title :  {{item.Title}}
