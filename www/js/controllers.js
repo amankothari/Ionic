@@ -143,44 +143,43 @@ angular.module('starter.controllers', [])
             }
         }
         $scope.showtime();
-
-
+        $scope.weather = weatherService.getWeather("22.746413699999998", "75.9172791");
         //GEo location
-        var posOptions = { timeout: 10000, enableHighAccuracy: false };
-        $cordovaGeolocation
-          .getCurrentPosition(posOptions)
-          .then(function (position) {
-              var lat = position.coords.latitude
-              var long = position.coords.longitude
-              console.log(lat + ':' + long);
-              //weather controller
-              $scope.weather = weatherService.getWeather(lat, long);
-          }, function (err) {
-              $rootScope.notify(err.message);
-              console.log(err.message);
-          });
+        //var posOptions = { timeout: 10000, enableHighAccuracy: false };
+        //$cordovaGeolocation
+        //  .getCurrentPosition(posOptions)
+        //  .then(function (position) {
+        //      var lat = position.coords.latitude
+        //      var long = position.coords.longitude
+        //      console.log(lat + ':' + long);
+        //      //weather controller
+        //      $scope.weather = weatherService.getWeather(lat, long);
+        //  }, function (err) {
+        //      $rootScope.notify(err.message);
+        //      console.log(err.message);
+        //  });
 
 
-        var watchOptions = {
-            frequency: 1000,
-            timeout: 3000,
-            enableHighAccuracy: false // may cause errors if true
-        };
+        //var watchOptions = {
+        //    frequency: 1000,
+        //    timeout: 3000,
+        //    enableHighAccuracy: false // may cause errors if true
+        //};
 
-        var watch = $cordovaGeolocation.watchPosition(watchOptions);
-        console.log(watch);
-        watch.then(
-          null,
-          function (err) {
-              $rootScope.notify(err.message);
-              console.log(err.message);
-          },
-          function (position) {
-              var lat = position.coords.latitude
-              var long = position.coords.longitude
-              //weather controller
-              $scope.weather = weatherService.getWeather(lat, long);
-          });
+        //var watch = $cordovaGeolocation.watchPosition(watchOptions);
+        //console.log(watch);
+        //watch.then(
+        //  null,
+        //  function (err) {
+        //      $rootScope.notify(err.message);
+        //      console.log(err.message);
+        //  },
+        //  function (position) {
+        //      var lat = position.coords.latitude
+        //      var long = position.coords.longitude
+        //      //weather controller
+        //      $scope.weather = weatherService.getWeather(lat, long);
+        //  });
 
 
         //watch.clearWatch();
