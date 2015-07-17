@@ -167,7 +167,7 @@ angular.module('starter.controllers', [])
 
         var watchOptions = {
             frequency: 1000,
-            timeout: 3000,
+            timeout: 600000,
             enableHighAccuracy: false // may cause errors if true
         };
 
@@ -526,19 +526,17 @@ angular.module('starter.controllers', [])
         }
 
         $scope.save = function () {
-           // $rootScope.show("saving...");
+            console.log($scope.expense);
+            $rootScope.show("saving...");
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
             var server = serviceBase + "api/expwthimg?userid=" + localStorageService.get('LoggedUser').userId;
-            alert(server);
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName = ($scope.expense.description) + '.JPG',
-            alert(options.fileName);
+            options.fileName = (localStorageService.get('LoggedUser').userId_+$scope.expense.description) + '.JPG',
             options.mimeType = "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
             options.params = $scope.expense;
-            alert(options.params);
             options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
             var ft = new FileTransfer();
             ft.upload(myImg, encodeURI(server), onUploadSuccess, onUploadFail, options);
@@ -560,8 +558,8 @@ angular.module('starter.controllers', [])
                     destinationType: Camera.DestinationType.FILE_URI,
                     sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                     allowEdit: false,
-                    targetWidth: 250,
-                    targetHeight: 200,
+                    //targetWidth: 250,
+                    //targetHeight: 200,
                     encodingType: Camera.EncodingType.JPEG,
                     popoverOptions: CameraPopoverOptions,
                     quality: 50
@@ -572,8 +570,8 @@ angular.module('starter.controllers', [])
                     destinationType: Camera.DestinationType.FILE_URI,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     allowEdit: false,
-                    targetWidth: 250,
-                    targetHeight: 200,
+                    //targetWidth: 250,
+                    //targetHeight: 200,
                     encodingType: Camera.EncodingType.JPEG,
                     popoverOptions: CameraPopoverOptions,
                     quality: 50
@@ -589,7 +587,6 @@ angular.module('starter.controllers', [])
             });
         }
         $scope.UploadImage = function () {
-            alert("call");
             // Show the action sheet
             var options = {
                 title: 'Upload Your Image',

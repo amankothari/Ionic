@@ -10,7 +10,7 @@
                 <a href="#/app/getproject/expense">
                     <label class="item item-input validated">
                         <div class="input-label">
-                            Project
+                            Project*
                         </div>
                         
                         <i class="ion-chevron-right"></i>
@@ -21,7 +21,7 @@
                 <a href="#/app/expensecategory">
                     <label class="item item-input validated">
                         <div class="input-label">
-                            Expense Type
+                            Expense Type*
                         </div>
                         <i class="ion-chevron-right"></i>
                         <input type="text" ng-model="expense.expensetype" required="required" readonly/>
@@ -32,12 +32,12 @@
                 <div class="item item-divider">
                 </div>
                 <label class="item item-input validated">
-                    <span class="input-label">Date</span>
+                    <span class="input-label">Date*</span>
                     <input type="date" ng-model="expense.date" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Amount</span>
+                    <span class="input-label">Amount*</span>
                     <input type="number" ng-model="expense.amount" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
@@ -63,7 +63,7 @@
                     </label>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Notes(optional)</span>
+                    <span class="input-label">Notes*</span>
                     <!--<textarea  type="text" ng-model="expense.Discription"></textarea>-->
                     <textarea id="TextArea" ng-model="expense.description" ng-keyup="autoExpand($event)" placeholder="notes" required="required"></textarea>
                     <i class="icon ion-alert-circled error"></i>

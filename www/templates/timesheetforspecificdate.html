@@ -9,7 +9,7 @@
                 <a href="#/app/getproject/timesheet">
                     <label class="item item-input validated">
                         <span class="input-label">
-                            Project
+                            Project*
                         </span>
                         <i class="ion-chevron-right"></i>
                         <input type="text" ng-model="task.projectname" required="required" readonly/>
@@ -21,7 +21,7 @@
                 <a href="#/app/tasktype">
                     <label class="item item-input validated">
                         <span class="input-label">
-                            Task Type
+                            Task Type*
                         </span>
                         <i class="ion-chevron-right"></i>
                         <input type="text" ng-model="task.tasktype" required="required" readonly/>
@@ -32,13 +32,13 @@
                 <div class="item item-divider">
                 </div>
                 <label class="item item-input validated">
-                    <span class="input-label">Date</span>
+                    <span class="input-label">Date*</span>
                     <input type="date" ng-model="task.date" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                
                 <div class="item item-divider">
-                    Duration
+                    Duration*
                 </div>
                 <label class="item item-input validated">
                     <span class="input-label">Hours:</span>
@@ -51,7 +51,7 @@
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Notes(optional)</span>
+                    <span class="input-label">Notes*</span>
                     <!--<textarea  type="text" ng-model="task.Details" > </textarea>-->
                    <textarea id="textarea" ng-model="task.description" ng-keyup="autoexpand($event)" placeholder="notes" required="required"></textarea>
                    

@@ -8,29 +8,29 @@
         <form novalidate="novalidate" name="form" on-valid-submit="save()">
             <div class="list">
                 <label class="item item-input validated">
-                    <span class="input-label">Emergency Mail</span>
+                    <span class="input-label">Emergency Mail*</span>
                     <input type="email" ng-model="leave.email" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Emergency Contact</span>
+                    <span class="input-label">Emergency Contact*</span>
                     <input type="tel" ng-model="leave.phone" maxlength="10" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <div class="item item-divider">
                 </div>
                 <label class="item item-input validated">
-                    <span class="input-label">Start Date</span>
+                    <span class="input-label">Start Date*</span>
                     <input type="date" ng-model="leave.fromdate" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">End Date</span>
+                    <span class="input-label">End Date*</span>
                     <input type="date" ng-model="leave.enddate" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Reason</span>
+                    <span class="input-label">Reason*</span>
                     <textarea id="TextArea" ng-model="leave.reason" ng-keyup="autoExpand($event)" placeholder="notes" required="required"></textarea>
                     <i class="icon ion-alert-circled error"></i>
                 </label>

@@ -12,30 +12,30 @@
         <form novalidate="novalidate" name="form" on-valid-submit="save()">
             <div class="list">
                 <label class="item item-input validated">
-                    <span class="input-label">Departing City</span>
+                    <span class="input-label">Departing City*</span>
                     <input type="text" id="Autocomplete" ng-autocomplete ng-model="travel.departcity" required="required" />
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Arrival City</span>
+                    <span class="input-label">Arrival City*</span>
                     <input type="text" id="Autocomplete" ng-autocomplete ng-model="travel.arrivalcity" required="required"/>
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Departure Date</span>
+                    <span class="input-label">Departure Date*</span>
                     <input type="date" ng-model="travel.departdate" required="required">
                     <i class="icon ion-alert-circled error"></i>
                     <!--<input type="text" pick-a-date="date" placeholder="Select Date" ng-model="travel.DepartureDate" />-->
                 </label>
                 <label class="item item-input validated">
-                    <span class="input-label">Return Date</span>
+                    <span class="input-label">Return Date*</span>
                     <input type="date" ng-model="travel.returndate" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
                 <a href="#/app/getproject/travel">
                     <label class="item item-input validated">
                         <div class="input-label">
-                            Project
+                            Project*
                         </div>
                         <i class="ion-chevron-right"></i>
                         <input type="text" ng-model="travel.projectname" readonly />
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <label class="item item-input validated">
-                    <span class="input-label">Notes</span>
+                    <span class="input-label">Notes*</span>
                     <!--<textarea  type="text" ng-model="task.Details" > </textarea>-->
                     <textarea id="textarea" ng-model="travel.description" ng-keyup="autoexpand($event)" placeholder="notes" required="required"></textarea>
                     <i class="icon ion-alert-circled error"></i>
