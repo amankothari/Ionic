@@ -1,0 +1,33 @@
+﻿<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Send an Email</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate="novalidate" name="form" on-valid-submit="SendEmail()">
+            <div class="list">
+             
+                <div class="item item-divider">
+                    Request for offline form
+                </div>
+                <br />
+                <label class="item item-input validated">
+                    <span class="input-label">Email</span>
+                    <input type="email" ng-model="Email.email" required="required">
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+
+                <div class="row">
+                    <div class="col col-50">
+                        <button class="button button-full button-positive" type="submit" ng-disabled="form.$dirty && form.$invalid">Send</button>
+                    </div>
+                    <div class="col col-50">
+                        <a class="button button-full button-assertive" href="#/app/home">Cancel</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    </ion-content>
+</ion-modal-view>

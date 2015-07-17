@@ -32,11 +32,13 @@
                 <ion-item menu-close href="#/app/signin" ng-show="!authentication.isAuth">
                     Sign In
                 </ion-item>
+                <ion-item menu-close href="#/app/home" ng-show="authentication.isAuth">
+                    Home
+                </ion-item>
                 <!--<ion-item menu-close href="#/app/home" >
                     Home
                 </ion-item>-->
                 <ion-item menu-close href="#/app/findanemployee" ng-show="!authentication.isCustomer && authentication.isAuth">
-
                     Find an Employee
                 </ion-item>
                 <ion-item menu-close href="#/app/timesheet" ng-show="!authentication.isCustomer && authentication.isAuth">

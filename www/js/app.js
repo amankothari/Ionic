@@ -30,7 +30,7 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
 }])
 
 .constant('ngAuthSettings', {
-   // apiServiceBaseUri: 'http://localhost:57934/',
+    //apiServiceBaseUri: 'http://localhost:57934/',
      apiServiceBaseUri: 'https://parature.webfortis.com/WebMobile/',
     clientId: 'ngAuthApp'
 })
@@ -190,7 +190,15 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.
                  }
              }
          })
-    
+    .state('app.sendemail', {
+        url: "/sendemail",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/sendemail.html",
+                controller: 'SendEmailCntrl'
+            }
+        }
+    })
     //Page for Customer
      .state('app.myproject', {
          url: "/myproject",

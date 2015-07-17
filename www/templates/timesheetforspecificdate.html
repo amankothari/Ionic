@@ -4,7 +4,7 @@
         <h1 class="title">Add Task</h1>
     </ion-header-bar>
     <ion-content>
-        <form novalidate="novalidate"  on-valid-submit="save()" >
+        <form novalidate="novalidate" name="form"  on-valid-submit="save()" >
             <div class="list">
                 <a href="#/app/getproject/timesheet">
                     <label class="item item-input validated">
@@ -54,11 +54,11 @@
                     <span class="input-label">Notes(optional)</span>
                     <!--<textarea  type="text" ng-model="task.Details" > </textarea>-->
                    <textarea id="textarea" ng-model="task.description" ng-keyup="autoexpand($event)" placeholder="notes" required="required"></textarea>
-                    <i class="icon ion-alert-circled error"></i>
+                   
                 </label>
                 <div class="row">
                     <div class="col col-50">
-                        <button class="button button-full button-positive" type="submit">Save</button>
+                        <button class="button button-full button-positive" type="submit" ng-disabled="form.$dirty && form.$invalid">Save</button>
 
                     </div>
                     <div class="col col-50">

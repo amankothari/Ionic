@@ -9,7 +9,7 @@
                 <div class="row" >
                     <div class="col">Thanks for logging in! We’re glad you’re here.</div>
                 </div>
-                <div class="row">
+                <div class="row" ng-show="weatherload">
                     <div class="col"><img src="https://parature.webfortis.com/WebMobile/img/web-fortis-logo21.png" class="company-logo" /></div>
                     <div class="col">
                         <weather-icon cloudiness="{{ weather.clouds }}"></weather-icon>

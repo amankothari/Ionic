@@ -1,16 +1,46 @@
-﻿<ion-modal-view >
-    <ion-header-bar>
-        <h1 class="title">Detail</h1>
-    </ion-header-bar>
+﻿<ion-view view-title="Employee Detail">
+    <ion-nav-back-button class="button-clear">
+        <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+
     <ion-content>
-        <div class="list list-inset">
-            <div ng-repeat="item in singleuser">
-                <img style="width:100px;height:100px;" ng-src="{{item.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+item.SystemUserId+'.jpg?'+date }}">
-                <div class="item">
-                    First Name : {{item.FirstName }} {{item.LastName}}<br />
-                    Title :  {{item.Title}}
+        <div class="card" ng-init="indivisualemployeedetail()">
+            <div class="item item-divider">
+
+            </div>
+            <div class="item item-text-wrap">
+                <div ng-repeat="item in singleuser">
+                    <img style="width:100px;height:100px;" ng-src="{{item.ImageURl== null && 'https://parature.webfortis.com/WebMobile/img/user.png' ||'https://parature.webfortis.com/WebMobile/img/UserPic/'+item.SystemUserId+'.jpg?'+date }}">
+
+                    <div class="item">
+                        <b>Name :</b>  {{item.FirstName }} {{item.LastName}}
+                    </div>
+                    <div class="item">
+                        <b>Title :</b>   {{item.Title}}
+                    </div>
+                    <div class="item">
+                        <b>Primary Email :</b>  {{item.PrimaryEmail}}
+                    </div>
+                    <div class="item">
+                        <b>Phone Number :</b>    {{item.PhoneNumber}}
+                    </div>
+                    <div class="item">
+                        <b>Address :</b>    {{item.Line1}}&nbsp; {{item.Line2}}&nbsp; {{item.Line3}}
+                    </div>
+                    <div class="item">
+                        <b>City :</b>    {{item.City}}
+                    </div>
+                    <div class="item">
+                        <b> State : </b>  {{item.State}}
+                    </div><div class="item">
+                        <b>Country :</b>    {{item.Country}}
+                    </div>
                 </div>
             </div>
+            <div class="item item-divider">
+
+            </div>
         </div>
-        </ion-content>
-</ion-modal-view>
+
+    </ion-content>
+</ion-view>

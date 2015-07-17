@@ -129,7 +129,7 @@ angular.module('starter.services', [])
         return authServiceFactory;
 }])
 
-.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', '$window', function ($q, $injector, $location, localStorageService, $window) {
+.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', '$window', '$rootScope', function ($q, $injector, $location, localStorageService, $window, $rootScope) {
 
         var authInterceptorServiceFactory = {};
 
@@ -163,6 +163,9 @@ angular.module('starter.services', [])
                     $location.path('#/app/signin');
                 }
 
+            }
+            if (rejection.status === 0) {
+                $rootScope.notify("Please check your Internet connection.");
             }
             return $q.reject(rejection);
         }
@@ -684,6 +687,25 @@ angular.module('starter.services', [])
                     weather.clouds = data.clouds ? data.clouds.all : undefined;
                 }
             });
+
+            return weather;
+        }
+    };
+})
+
+.factory('SendEmailService', function ($q, $http, ngAuthSettings) {
+    var url = ngAuthSettings.apiServiceBaseUri;
+    return {
+        SendEmail: function (data) {
+            console.log(data);
+            var deffred = $q.defer();
+            $http.get(url + 'api/SendEmail?MailTo='+data.email+'&Subject=Travel Request Form&body=test').success(function (respond) {
+                console.log(respond);
+                deffred.resolve(respond);
+            }).error(function (err, status) {
+                deffred.reject(err);
+            });
+            return deffred.promise;
 
             return weather;
         }

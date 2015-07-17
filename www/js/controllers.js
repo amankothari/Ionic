@@ -5,6 +5,7 @@ angular.module('starter.controllers', [])
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
     // listen for the $ionicView.enter event:
+    $scope.weatherload = false;
     CallEveryTime();
     
     $scope.showEmp = true;
@@ -152,6 +153,12 @@ angular.module('starter.controllers', [])
               console.log(lat + ':' + long);
               //weather controller
               $scope.weather = weatherService.getWeather(lat, long);
+              setTimeout(function () {
+                  if ($scope.weather) {
+                      $scope.weatherload = true;
+                  }
+              },300)
+              
           }, function (err) {
               $rootScope.notify(err.message);
               console.log(err.message);
@@ -276,11 +283,13 @@ angular.module('starter.controllers', [])
             $scope.slidedisable = false;
         },function (errr) {
             try {
+                $rootScope.notify(JSON.stringify(errr));
+            } catch (e) {
+              
+            }
+            finally {
                 $scope.timesheetload = false;
                 $scope.slidedisable = false;
-                $rootScope.notify(errr.Message);
-            } catch (e) {
-                $rootScope.hide();
             }
         })
     }
@@ -420,8 +429,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory,$rootScope,notification,recentitem, CategoryService, $location, $timeout,notification, getsetServiceForExpense, authService,localStorageService) {
-   
-
+      $scope.picData = "";
         $scope.expense = {};
         $scope.allExpense = {};
         $scope.Categories = {};
@@ -430,6 +438,7 @@ angular.module('starter.controllers', [])
         $scope.categoryload = false;
         $scope.totalamount = '';
         $scope.slidedisable = false;
+        $scope.showexpensepic = false;
         var date = new Date();
         date.setDate(date.getDate());
         $scope.date = notification.convertDate(date);
@@ -477,14 +486,14 @@ angular.module('starter.controllers', [])
             }
 
         })
-     $scope.initrecentCategory = function () {
+       $scope.initrecentCategory = function () {
          $scope.recentinitcategory = recentitem.recentexpense();
          if ($scope.recentinitcategory == null) {
              $scope.recenttab = false;
              $scope.initCategory();
          }
         }
-     $scope.initCategory = function () {
+       $scope.initCategory = function () {
          $scope.recenttab = false;
             $scope.categoryload = true;
             CategoryService.Getcategory().then(function (out) {
@@ -501,7 +510,7 @@ angular.module('starter.controllers', [])
         }
 
         //save expense data 
-        $scope.save = function (input) {
+        $scope.oldsave = function (input) {
             $rootScope.show('saving..');
             CategoryService.ExpensePost($scope.expense).then(function (out) {
                 $rootScope.hide();
@@ -516,6 +525,88 @@ angular.module('starter.controllers', [])
             })
         }
 
+        $scope.save = function () {
+            $rootScope.show("saving...");
+            var serviceBase = ngAuthSettings.apiServiceBaseUri;
+            var server = serviceBase + "api/expwthimg?userid=" + localStorageService.get('LoggedUser').userId;
+            var myImg = $scope.picData;
+            var options = new FileUploadOptions();
+            options.fileName = ($scope.expense.description) + '.JPG',
+            options.mimeType = "image/jpg",
+            options.fileKey = "post";
+            options.chunkedMode = false;
+            options.params = $scope.expense;
+            options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
+            var ft = new FileTransfer();
+            ft.upload(myImg, encodeURI(server), onUploadSuccess, onUploadFail, options);
+        }
+
+        function onUploadSuccess() {
+            $rootScope.hide();
+            $location.path('/app/expenses');
+        }
+        function onUploadFail(data) {
+            $rootScope.hide();
+            $rootScope.notify(JSON.stringify(data));
+        }
+
+    //Post Image Function
+        $scope.addImage = function (index) {
+            if (index == 1) {
+                var options = {
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+                    allowEdit: false,
+                    targetWidth: 250,
+                    targetHeight: 200,
+                    encodingType: Camera.EncodingType.JPEG,
+                    popoverOptions: CameraPopoverOptions,
+                    quality: 50
+                };
+            }
+            if (index == 2) {
+                var options = {
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    allowEdit: false,
+                    targetWidth: 250,
+                    targetHeight: 200,
+                    encodingType: Camera.EncodingType.JPEG,
+                    popoverOptions: CameraPopoverOptions,
+                    quality: 50
+                };
+            }
+            $cordovaCamera.getPicture(options).then(function (imageData) {
+                $scope.showexpensepic = true;
+                $scope.picData = imageData;
+                var image = document.getElementById('expensepic');
+                image.src = $scope.picData;
+            }, function (err) {
+                $rootScope.notify(JSON.stringify(err));
+            });
+        }
+        $scope.UploadImage = function () {
+            console.log("call");
+            // Show the action sheet
+            var options = {
+                title: 'Upload Your Image',
+                buttonLabels: ['From Camera', 'From File Manager'],
+                addCancelButtonWithLabel: 'Cancel',
+                androidEnableCancelButton: true,
+                winphoneEnableCancelButton: true,
+                //addDestructiveButtonWithLabel: 'Delete it'
+            };
+            document.addEventListener("deviceready", function () {
+                $cordovaActionSheet.show(options)
+                  .then(function (btnIndex) {
+                      var index = btnIndex;
+                      if (index == 1 || index == 2) {
+                          $scope.addImage(index);
+                      }
+                  });
+            }, false);
+
+        }
 
     
 
@@ -531,11 +622,15 @@ angular.module('starter.controllers', [])
             $scope.totalamount = AmountTotal();
         }, function (errr) {
             try {
+                $rootScope.notify(JSON.stringify(errr));
+            } catch (e) {
+               
+            }
+            finally
+            {
                 $scope.expenseload = false;
                 $scope.slidedisable = false;
-                $rootScope.notify(errr.Message);
-            } catch (e) {
-                $rootScope.hide();
+
             }
         })
     }
@@ -614,10 +709,12 @@ angular.module('starter.controllers', [])
             $scope.travelshow = false;
         }, function (errr) {
             try {
-                $scope.travelshow = false;
-                $rootScope.notify(errr.Message);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
                 $rootScope.hide();
+            }
+            finally {
+                $scope.travelshow = false;
             }
            
         })
@@ -676,27 +773,31 @@ angular.module('starter.controllers', [])
             $scope.leaveshow = false;
         }, function (errr) {
             try {
-                $scope.leaveshow = false;
-                $rootScope.notify(errr.Message);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
                 $rootScope.hide();
+            }
+            finally {
+                $scope.leaveshow = false;
             }
         })
     }
 
 })
 
-
-
 .controller('FindanEmployee', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, FindanEmployeeService, $location, $timeout, getsetService, authService, $rootScope, notification,localStorageService) {
     $scope.Employee = {};
     $scope.date = new Date().getTime();
     $scope.$on('$ionicView.enter', function (e) {
-        getdata();
+      
     });
     //get all user
     getdata();
-    $scope.singleuser = FindanEmployeeService.getsingleuser();
+    $scope.indivisualemployeedetail = function () {
+        console.log('call');
+        $scope.singleuser = FindanEmployeeService.getsingleuser();
+    }
+    
     function getdata() {
         $scope.employeeload = true;
         FindanEmployeeService.Allemployee().then(function (success) {
@@ -704,9 +805,12 @@ angular.module('starter.controllers', [])
             $scope.Employee = success;
         }, function (errr) {
             try {
-                $rootScope.notify(errr.Message);
+                console.log(errr);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
-                $rootScope.hide();
+            }
+            finally {
+                $scope.employeeload = false;
             }
         })
     }
@@ -731,7 +835,7 @@ angular.module('starter.controllers', [])
     });
     $scope.user = {};
     function getdata() {
-        $rootScope.show("wait..");
+        $rootScope.show("Loading....");
         FindanEmployeeService.GetUserFromServer(localStorageService.get('LoggedUser').userId).then(function (success) {
             $rootScope.hide();
             console.log(success);
@@ -739,8 +843,11 @@ angular.module('starter.controllers', [])
             $scope.user.Name = $scope.user.FirstName + " " + $scope.user.LastName;
         }, function (errr) {
             try {
-                $rootScope.notify(errr.Message);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
+               
+            }
+            finally {
                 $rootScope.hide();
             }
         })
@@ -756,8 +863,11 @@ angular.module('starter.controllers', [])
             $location.path('/app/home');
         }, function (errr) {
             try {
-                $rootScope.notify(errr.Message);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
+               
+            }
+            finally {
                 $rootScope.hide();
             }
         })
@@ -825,7 +935,6 @@ angular.module('starter.controllers', [])
     //open actionsheet
     // Triggered on a button click, or some other target
     $scope.show = function () {
-        console.log('call');
         // Show the action sheet
         var options = {
             title: 'Upload Your Image',
@@ -908,7 +1017,7 @@ angular.module('starter.controllers', [])
 
     //This method is used for initilization the customer profile data
     $scope.initilizationProfile = function () {
-        $rootScope.show("wait..");
+        $rootScope.show("Loading...");
         var getProfileData = CustomerService.CustomerProfile(localStorageService.get('LoggedUser').userId).then(function (result) {
             console.log(result);
             $rootScope.hide();
@@ -917,8 +1026,11 @@ angular.module('starter.controllers', [])
             $scope.Profile.OrignalEmailAddress = result.EmailAddress1;
         }, function (errr) {
             try {
-                $rootScope.notify(errr);
+                $rootScope.notify(JSON.stringify(errr));
             } catch (e) {
+                
+            }
+            finally {
                 $rootScope.hide();
             }
         })
@@ -947,24 +1059,13 @@ angular.module('starter.controllers', [])
                 $rootScope.notify("Updated Successfully");
                 $location.path('/app/home');
             }
-            if (errr == "AlreadyExist") {
-                //var alertPopup = $ionicPopup.alert({
-                //    title: 'Sorry',
-                //    template: 'EMail Id already Exist'
-                //});
-                //alertPopup.then(function (res) {
-
-                //});
-                $rootScope.notify("EMail Id already Exist");
-            }
-
-           
-
         }, function (errr) {
             try {
-                $rootScope.hide();
                 $rootScope.notify("EMail Id already Exist. Not Updated!!");
             } catch (e) {
+               
+            }
+            finally {
                 $rootScope.hide();
             }
         })
@@ -983,4 +1084,21 @@ angular.module('starter.controllers', [])
         });
     };
 
+})
+
+.controller('SendEmailCntrl', function ($scope, SendEmailService, localStorageService, $rootScope, notification, $location) {
+    $scope.Email = {};
+    $scope.SendEmail = function () {
+        console.log($scope.Email);
+        $rootScope.show("Sending..");
+        SendEmailService.SendEmail($scope.Email).then(function (result) {
+            $rootScope.hide();
+            $location.path('/app/home');
+            $rootScope.notify(JSON.stringify(result));
+        }, function (err) {
+            $rootScope.hide();
+            $rootScope.notify(JSON.stringify(err));
+        })
+    }
+    
 })

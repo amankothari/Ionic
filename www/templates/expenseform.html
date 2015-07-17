@@ -5,7 +5,7 @@
         <h1 class="title">Add Expense</h1>
     </ion-header-bar>
     <ion-content>
-        <form novalidate="novalidate"  on-valid-submit="save()">
+        <form novalidate="novalidate" name="form" on-valid-submit="save()">
             <div class="list">
                 <a href="#/app/getproject/expense">
                     <label class="item item-input validated">
@@ -41,16 +41,16 @@
                     <input type="number" ng-model="expense.amount" required="required">
                     <i class="icon ion-alert-circled error"></i>
                 </label>
-                <!--<label class="item item-input">
+                <label class="item item-input">
                     <div class="row">
-                        <div class="col col-75"></div>
+                        <div class="col col-75">
+                            <img style="width:100px;height:100px;"  id="expensepic" ng-show="showexpensepic"  />
+                        </div>
                         <div class="col">
-                            <button class="button button-small button-outline button-positive" ng-click="show()">
-                                Upload
-                            </button>
+                            <input class="button button-small button-outline button-positive" type="button" value="Upload" ng-click="UploadImage()"/>
                         </div>
                     </div>
-                </label>-->
+                </label>
 
 
                 <label class="item item-toggle">
@@ -70,7 +70,7 @@
                 </label>
                 <div class="row">
                     <div class="col col-50">
-                        <button class="button button-full button-positive" type="submit">Save</button>
+                        <button class="button button-full button-positive" type="submit" ng-disabled="form.$dirty && form.$invalid">Save</button>
 
                     </div>
                     <div class="col col-50">
