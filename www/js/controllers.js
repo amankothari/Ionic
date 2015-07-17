@@ -184,6 +184,11 @@ angular.module('starter.controllers', [])
               var long = position.coords.longitude
               //weather controller
               $scope.weather = weatherService.getWeather(lat, long);
+              setTimeout(function () {
+                  if ($scope.weather) {
+                      $scope.weatherload = true;
+                  }
+              }, 300)
           });
         //watch.clearWatch();
         //// OR
@@ -228,8 +233,6 @@ angular.module('starter.controllers', [])
         var date = new Date();
         date.setDate(date.getDate());
         $scope.date = notification.convertDate(date);
-       
-        getdata($scope.date);
 
         $scope.slidePrevious = function () {
             date.setDate(date.getDate() - 1);
@@ -244,15 +247,9 @@ angular.module('starter.controllers', [])
         }
 
     
-        //$scope.$on('$ionicView.enter', function () {
-        //    if (!$scope.authentication.isAuth) {
-        //        $location.path('/app/signin');
-        //        $ionicHistory.nextViewOptions({
-        //            disableBack: true
-        //        });
-        //    }
-        //    getdata($scope.date);
-        //})
+        $scope.$on('$ionicView.enter', function () {
+            getdata($scope.date);
+        })
 
         //Go to next page
         $scope.Goto = function () {
@@ -442,7 +439,6 @@ angular.module('starter.controllers', [])
         var date = new Date();
         date.setDate(date.getDate());
         $scope.date = notification.convertDate(date);
-        getdata($scope.date);
 
         $scope.slidePrevious = function () {
            date.setDate(date.getDate() - 1);
@@ -472,7 +468,7 @@ angular.module('starter.controllers', [])
             return $scope.shownGroup === group;
         };
         $scope.$on('$ionicView.enter', function () {
-            //getdata($scope.date);
+            getdata($scope.date);
             var expensedata = getsetServiceForExpense.GetExpensedata();
             $scope.expense.date = expensedata.Date;
             $scope.expense.empguid = localStorageService.get('LoggedUser').userId;
@@ -532,7 +528,7 @@ angular.module('starter.controllers', [])
             var server = serviceBase + "api/expwthimg?userid=" + localStorageService.get('LoggedUser').userId;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName = (localStorageService.get('LoggedUser').userId_+$scope.expense.description) + '.JPG',
+            options.fileName = (localStorageService.get('LoggedUser').userId+_+$scope.expense.description) + '.JPG',
             options.mimeType = "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
