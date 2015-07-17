@@ -586,7 +586,7 @@ angular.module('starter.controllers', [])
             });
         }
         $scope.UploadImage = function () {
-            console.log("call");
+            alert("call");
             // Show the action sheet
             var options = {
                 title: 'Upload Your Image',
