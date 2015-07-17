@@ -526,16 +526,19 @@ angular.module('starter.controllers', [])
         }
 
         $scope.save = function () {
-            $rootScope.show("saving...");
+           // $rootScope.show("saving...");
             var serviceBase = ngAuthSettings.apiServiceBaseUri;
             var server = serviceBase + "api/expwthimg?userid=" + localStorageService.get('LoggedUser').userId;
+            alert(server);
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
             options.fileName = ($scope.expense.description) + '.JPG',
+            alert(options.fileName);
             options.mimeType = "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
             options.params = $scope.expense;
+            alert(options.params);
             options.headers = { 'Authorization': "Bearer " + localStorageService.get('Token').access_token };
             var ft = new FileTransfer();
             ft.upload(myImg, encodeURI(server), onUploadSuccess, onUploadFail, options);
