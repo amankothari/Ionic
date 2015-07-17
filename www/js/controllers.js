@@ -428,7 +428,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $rootScope, notification, recentitem, CategoryService, $location, $timeout, notification, getsetServiceForExpense, authService, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $rootScope, notification, recentitem, CategoryService, $location, $timeout, notification, getsetServiceForExpense, authService, localStorageService,ngAuthSettings, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
       $scope.picData = "";
         $scope.expense = {};
         $scope.allExpense = {};
