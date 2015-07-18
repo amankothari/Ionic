@@ -426,7 +426,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $rootScope, notification, recentitem, CategoryService, $location, $timeout, notification, getsetServiceForExpense, authService, localStorageService,ngAuthSettings, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
-      $scope.picData = "";
+        $scope.picData = "";
         $scope.expense = {};
         $scope.allExpense = {};
         $scope.Categories = {};
@@ -528,7 +528,7 @@ angular.module('starter.controllers', [])
             var server = serviceBase + "api/expwthimg?userid=" + localStorageService.get('LoggedUser').userId;
             var myImg = $scope.picData;
             var options = new FileUploadOptions();
-            options.fileName = (localStorageService.get('LoggedUser').userId+_+$scope.expense.description) + '.JPG',
+            options.fileName =(localStorageService.get('LoggedUser').userName.substring(0, localStorageService.get('LoggedUser').userName.indexOf("@webfortis.com"))) +'_'+new Date().getTime()+ '.JPG',
             options.mimeType = "image/jpg",
             options.fileKey = "post";
             options.chunkedMode = false;
