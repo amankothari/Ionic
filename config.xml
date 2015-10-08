@@ -7,14 +7,10 @@
   <author email="akothari@webfortis.com" href="http://webfortis.in/">&#xD;
       WFI Team India&#xD;
     </author>
-  <gap:plugin name="nl.x-services.plugins.actionsheet" source="pgb" version="1.1.1" />
-  <gap:plugin name="nl.x-services.plugins.toast" source="pgb" version="2.0.2" />
-  <gap:plugin name="org.apache.cordova.camera" source="pgb" version="0.3.2" />
-  <gap:plugin name="org.apache.cordova.file" source="pgb" version="1.3.1" />
-  <gap:plugin name="org.apache.cordova.geolocation" source="pgb" version="0.3.10" />
-  <gap:plugin name="org.apache.cordova.media-capture" source="pgb" version="0.3.3" />
-  <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-  
+  <gap:plugin name="nl.x-services.plugins.actionsheet" version="1.1.1" />
+  <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
+  <gap:plugin name="org.apache.cordova.camera" />
+  <gap:plugin name="org.apache.cordova.geolocation" />
   
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
