@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app=angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.services', 'starter.directive', 'starter.filter', 'LocalStorageModule', 'ngMessages', 'ngAutocomplete']);
-console.log(app);
-app.run(function ($ionicPlatform) {
+angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.services', 'starter.directive', 'starter.filter', 'LocalStorageModule', 'ngMessages', 'ngAutocomplete'])
+
+.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -21,20 +21,20 @@ app.run(function ($ionicPlatform) {
 })
 
 
-app.config(function ($httpProvider) {
+.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 })
 
-app.run(['authService', function (authService) {
+.run(['authService', function (authService) {
     authService.fillAuthData();
 }])
 
-app.constant('ngAuthSettings', {
+.constant('ngAuthSettings', {
     //apiServiceBaseUri: 'http://localhost:57934/',
      apiServiceBaseUri: 'https://parature.webfortis.com/WebMobile/',
     clientId: 'ngAuthApp'
 })
-app.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
     .state('app', {
