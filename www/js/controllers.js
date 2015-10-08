@@ -425,7 +425,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $rootScope, notification, recentitem, CategoryService, $location, $timeout, notification, getsetServiceForExpense, authService, localStorageService,ngAuthSettings, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+.controller('expensesCntrl', function ($scope, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $rootScope, notification, recentitem, CategoryService, $location, $timeout, notification, getsetServiceForExpense, authService, localStorageService,ngAuthSettings, $cordovaCamera, $cordovaFile, $cordovaActionSheet) {
         $scope.picData = "";
         $scope.expense = {};
         $scope.allExpense = {};
@@ -823,7 +823,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaActionSheet) {
+.controller('UserProfile', function ($scope, FindanEmployeeService, $location,$ionicHistory, $timeout,ngAuthSettings, getsetService, authService, $rootScope, notification, localStorageService, $cordovaCamera, $cordovaFile, $cordovaActionSheet) {
     $scope.$on('$ionicView.enter', function (e) {
         //$ionicHistory.clearCache();
         //$ionicHistory.clearHistory();
