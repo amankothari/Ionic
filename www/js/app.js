@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 //Demo Comment
 //Second Comment
+//Third comment
 angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.services', 'starter.directive', 'starter.filter', 'LocalStorageModule', 'ngMessages', 'ngAutocomplete'])
 
 .run(function ($ionicPlatform) {
