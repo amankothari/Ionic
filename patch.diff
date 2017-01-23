@@ -1,0 +1,24 @@
+From d9ad7ac6d27e1106483b6d83d14ae5005c6fdee2 Mon Sep 17 00:00:00 2001
+From: Aman Kothari <amankothari85@gmail.com>
+Date: Mon, 23 Jan 2017 18:55:40 +0400
+Subject: [PATCH] Push
+
+---
+ www/js/app.js | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/www/js/app.js b/www/js/app.js
+index d591b4f..264998e 100644
+--- a/www/js/app.js
++++ b/www/js/app.js
+@@ -6,6 +6,7 @@
+ // 'starter.controllers' is found in controllers.js
+ //Demo Comment
+ //Second Comment
++//Third comment
+ angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'starter.services', 'starter.directive', 'starter.filter', 'LocalStorageModule', 'ngMessages', 'ngAutocomplete'])
+ 
+ .run(function ($ionicPlatform) {
+-- 
+2.10.2.windows.1
+
